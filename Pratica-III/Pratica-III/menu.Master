@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="menu.master.cs" Inherits="Pratica_III.menu" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="font-style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="materialize/materialize.min.css" rel="stylesheet" />
+    <script src="jquery.js"></script>
+    <script src="materialize/materialize.min.js"></script>
+</head>
+<body>
+    <ul id="cadastros-drop" class="dropdown-content">
+      <li><a href="cadastro_especialidade.aspx">Especialidade</a></li>
+      <li><a href="cadastro_paciente.aspx">Paciente</a></li>
+      <li><a href="cadastro_medico.aspx">Médico</a></li>
+      <li class="divider"></li>
+      <li><a href="cadastro_consulta.aspx">Consulta</a></li>
+    </ul>
+    <ul id="relatorios-drop" class="dropdown-content">
+      <li><a href="relatorio_geral.aspx">Números de consulta</a></li>
+      <li><a href="relatorio_paciente.aspx">Consultas de usuário</a></li>
+      <li class="divider"></li>
+      <li><a href="relatorio_medicao.aspx">Medição</a></li>
+    </ul>
+    <nav class="green lighten-2">
+      <div class="nav-wrapper container">
+        <a href="#!" class="brand-logo"><img src="logo.png" height="64px"/></a>
+        <ul class="right hide-on-med-and-down">
+            <li id="home-menu"><a href="index.aspx">Home</a></li>
+            <li id="agendamento-menu"><a href="agendamento_consulta.aspx">Agendamentos de consulta</a></li>
+            <li id="cadastro-menu"><a class="dropdown-trigger" data-target="cadastros-drop">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li id="relatorio-menu"><a class="dropdown-trigger" data-target="relatorios-drop">Relatórios<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+        <form id="form1" runat="server">
+            <div class="section">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
+    </div>
+    <footer class="page-footer green lighten-1">
+          <div class="footer-copyright">
+            <div class="container">
+            © 2018 copyright
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+</body>
+    <script src="script.js"></script>
+</html>
