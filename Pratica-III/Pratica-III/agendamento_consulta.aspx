@@ -8,21 +8,21 @@
         <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">contact_mail</i>
-                    <input id="icon_prefix" type="email" class="validate">
-                    <label for="icon_prefix">Email paciente</label>
+                    <asp:TextBox runat="server" id="txtEmailPaciente" type="email" class="validate"></asp:TextBox>
+                    <label for="txtEmailPaciente">Email paciente</label>
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix">contact_mail</i>
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Email medico</label>
+                    <asp:TextBox runat="server"  id="txtEmailMedico" type="email" class="validate"></asp:TextBox>
+                    <label for="txtEmailMedico">Email medico</label>
                     <span class="helper-text" data-error="wrong" data-success="right"></span>
                 </div>
             </div>
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">date_range</i>
-                <input id="date" type="text" class="datepicker">
-                <label for="date">Dia</label>
+                <asp:TextBox runat="server"  id="txtData" type="text" class="datepicker"></asp:TextBox>
+                <label for="txtData">Dia</label>
             </div>
             <div class="input-field col s6">
                 <select>
@@ -53,6 +53,6 @@
                 <label>Duração</label>
             </div>
         </div>
-        <center><a class="waves-effect waves-light btn-large green darken-1">Submeter</a></center>
+        <center><asp:Button ID="btnSubmit" runat="server" Text="Submeter" class="waves-effect waves-light btn-large green darken-1"  OnClick="btnSubmit_Click" /></center>
     </div>
 </asp:Content>
