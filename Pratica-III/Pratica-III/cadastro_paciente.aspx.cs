@@ -11,16 +11,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Pratica_III.App_Start;
 using System.IO;
-using System.Data;
 using System.Drawing;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.IO;
 
 namespace Pratica_III
 {
@@ -40,15 +33,14 @@ namespace Pratica_III
             conexaoBD acessoBD = new conexaoBD();
             acessoBD.Connection(conString);
             acessoBD.AbrirConexao();
-
-            // checar se o usuario digitou dados para o LOGIN e SENHA
+            
             if (txtEmail.Text == "" || txtNiver.Text == "" || txtNome.Text == "" || txtTelefoneCel.Text == "" || txtTelefoneRes.Text == "")
             {
-                //aparecer o alert falando pra preencher tudo
+                //TODO aparecer o alert falando pra preencher tudo
             }
             else
             {
-                //ver se dados estão formatados corretamente
+                //TODO ver se dados estão formatados corretamente
                 byte[] vetorImagem;
                 try
                 {
@@ -77,25 +69,17 @@ namespace Pratica_III
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
-                        sqlCmd.CommandText = "INSERT INTO PACIENTE(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO) VALUES (@NOME,convert(datetime,@ANIVERSARIO,103),@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL, @IMAGEM)";
+                        sqlCmd.CommandText = "INSERT INTO PACIENTE(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL, @FOTO)";
 
-                        sqlCmd.Parameters.Add("@NOME", System.Data.SqlDbType.VarChar, 50);
-                        sqlCmd.Parameters.Add("@ANIVERSARO", System.Data.SqlDbType.VarChar, 10000);
-                        sqlCmd.Parameters.Add("@EMAIL", System.Data.SqlDbType.VarChar, 50);
-                        sqlCmd.Parameters.Add("@CELULAR", System.Data.SqlDbType.VarChar, 50);
-                        sqlCmd.Parameters.Add("@TELEFONE_RESIDENCIAL", System.Data.SqlDbType.VarChar, 50);
-                        sqlCmd.Parameters.Add("@FOTO", System.Data.SqlDbType.Image);
+                        sqlCmd.Parameters.AddWithValue("@NOME", txtNome.Text);
+                        sqlCmd.Parameters.AddWithValue("@EMAIL", txtEmail.Text);
+                        sqlCmd.Parameters.AddWithValue("@CELULAR", txtTelefoneCel.Text);
+                        sqlCmd.Parameters.AddWithValue("@TELEFONE_RESIDENCIAL", txtTelefoneRes.Text);
+                        sqlCmd.Parameters.AddWithValue("@FOTO", vetorImagem);
+                        sqlCmd.Parameters.AddWithValue("@ANIVERSARIO", txtNiver.Text);
                     }
-
-                    sqlCmd.Parameters["@NOME"].Value = txtNome.Text;
-                    sqlCmd.Parameters["@ANIVERSARIO"].Value = txtNiver.Text;//todo erro aqui
-                    sqlCmd.Parameters["@EMAIL"].Value = txtEmail.Text;
-                    sqlCmd.Parameters["@CELULAR"].Value = txtTelefoneCel.Text;
-                    sqlCmd.Parameters["@TELEFONE_RESIDENCIAL"].Value = txtTelefoneRes.Text;
-                    sqlCmd.Parameters["@FOTO"].Value = vetorImagem;
+                    
                     int iResultado = sqlCmd.ExecuteNonQuery();
-
-
                 }
                 catch (Exception er)
                 {

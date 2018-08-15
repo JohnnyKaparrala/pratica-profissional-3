@@ -6,11 +6,10 @@
         <center><h4>Cadastro de especialidade</h4></center>
         <form class="col s12">
             <div class="input-field col s12">
-                <i class="material-icons prefix">local_hospital</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Especialidade</label>
+                <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Nome da especialidade">local_hospital</i>
+                <asp:TextBox placeholder="Especialidade" runat="server" id="txtEsp" type="" class="validate"></asp:TextBox>
             </div>
-            <center><a class="waves-effect waves-light btn-large green darken-1">Submeter</a></center>
+            <center><asp:Button CausesValidation="False" runat="server" ID="btn_Submit" class="waves-effect waves-light btn-large green darken-1" Text="Submeter" OnClick="btn_Submit_Click"/></center>
         </form>
     </div>
 </asp:Content>

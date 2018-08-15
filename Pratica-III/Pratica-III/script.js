@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $('.tooltipped').tooltip();
     $('.dropdown-trigger').dropdown();
     $('.datepicker').datepicker({
         i18n: {
@@ -11,7 +12,7 @@
             clear:'Limpar',
             done:'Ok'
         },
-        format: 'dd-mm-yyyy',
+        format: 'yyyy-dd-mm',
         yearRange: 100
     });
     $('select').formSelect();
