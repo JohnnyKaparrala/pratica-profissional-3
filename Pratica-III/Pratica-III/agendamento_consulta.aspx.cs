@@ -111,10 +111,12 @@ namespace Pratica_III
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta agendada com sucesso!'});", true);
+                    limparInputs();
                 }
                 catch (Exception er)
                 {
-                    
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Ocorreu um erro durante a operação!'});", true);
                 }
                 acessoBD.FecharConexao();
             }

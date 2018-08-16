@@ -13,7 +13,6 @@
                 <div class="input-field col s6">
                     <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Email do paciente">contact_mail</i>
                     <asp:TextBox placeholder="Email" runat="server" id="txtEmail" type="email" class="validate"></asp:TextBox>
-                    <span class="helper-text" data-error="wrong" data-success="right"></span>
                 </div>
             </div>
             <div class="row">

@@ -22,6 +22,11 @@ namespace Pratica_III
         conexaoBD acessoBD;
         String conString;
 
+        protected void limparInputs ()
+        {
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -131,10 +136,12 @@ namespace Pratica_III
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Médico registrado com sucesso!'});", true);
+                    limparInputs();
                 }
                 catch (Exception er)
                 {
-                    txtEmail.Text = er.Message;
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Ocorreu um erro durante a operação!'});", true);
                 }
                 acessoBD.FecharConexao();
             }

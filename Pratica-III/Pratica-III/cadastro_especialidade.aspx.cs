@@ -24,6 +24,11 @@ namespace Pratica_III
 
         }
 
+        protected void limparInputs()
+        {
+
+        }
+
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
             // associando a string de conexao com o BD com o configurado no WebConfig
@@ -58,10 +63,11 @@ namespace Pratica_III
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Especialidade registrada com sucesso!'});", true);
                 }
                 catch (Exception er)
                 {
-                    
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Ocorreu um erro durante a operação!'});", true);
                 }
                 acessoBD.FecharConexao();
             }
