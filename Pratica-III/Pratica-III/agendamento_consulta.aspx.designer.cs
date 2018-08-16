@@ -40,6 +40,24 @@ namespace Pratica_III {
         protected global::System.Web.UI.WebControls.TextBox txtData;
         
         /// <summary>
+        /// Controle selEsp.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selEsp;
+        
+        /// <summary>
+        /// Controle txtDuracao.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList txtDuracao;
+        
+        /// <summary>
         /// Controle btnSubmit.
         /// </summary>
         /// <remarks>

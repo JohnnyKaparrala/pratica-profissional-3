@@ -7,52 +7,49 @@
         <center><h4>Agendamento consulta</h4></center>
         <div class="row">
                 <div class="input-field col s6">
-                    <i class="material-icons prefix">contact_mail</i>
-                    <asp:TextBox runat="server" id="txtEmailPaciente" type="email" class="validate"></asp:TextBox>
-                    <label for="txtEmailPaciente">Email paciente</label>
+                    <i class="material-icons prefix" data-tooltip="Email do paciente">contact_mail</i>
+                    <asp:TextBox placeholder="Email paciente" data-position="bottom" runat="server" id="txtEmailPaciente" type="email" class="validate"></asp:TextBox>
                 </div>
                 <div class="input-field col s6">
-                    <i class="material-icons prefix">contact_mail</i>
-                    <asp:TextBox runat="server"  id="txtEmailMedico" type="email" class="validate"></asp:TextBox>
-                    <label for="txtEmailMedico">Email medico</label>
+                    <i class="material-icons prefix" data-position="bottom" data-tooltip="Email do médico">contact_mail</i>
+                    <asp:TextBox placeholder="Email médico" runat="server"  id="txtEmailMedico" type="email" class="validate"></asp:TextBox>
                     <span class="helper-text" data-error="wrong" data-success="right"></span>
                 </div>
             </div>
         <div class="row">
             <div class="input-field col s6">
-                <i class="material-icons prefix">date_range</i>
-                <asp:TextBox runat="server"  id="txtData" type="text" class="datepicker"></asp:TextBox>
-                <label for="txtData">Dia</label>
+                <i class="material-icons prefix"  data-position="bottom" data-tooltip="Data do dia da consulta">date_range</i>
+                <asp:TextBox placeholder="Dia" runat="server"  id="txtData" type="text" class="datepicker"></asp:TextBox>
             </div>
             <div class="input-field col s6">
-                <select>
-                  <option value="" disabled selected>Escolha o horário</option>
-                  <option value="1">09:00</option>
-                  <option value="1">09:30</option>
-                  <option value="1">10:00</option>
-                  <option value="1">10:30</option>
-                  <option value="1">11:00</option>
-                  <option value="1">11:30</option>
-                  <option value="1">14:00</option>
-                  <option value="1">14:30</option>
-                  <option value="1">15:00</option>
-                  <option value="1">15:30</option>
-                  <option value="1">16:00</option>
-                  <option value="1">16:30</option>
-                </select>
+                <asp:DropDownList runat="server" id="selEsp">
+                    <asp:ListItem disabled>Escolha a especialidade</asp:ListItem>
+                    <asp:ListItem>09:00</asp:ListItem>
+                    <asp:ListItem>09:30</asp:ListItem>
+                    <asp:ListItem>10:00</asp:ListItem>
+                    <asp:ListItem>10:30</asp:ListItem>
+                    <asp:ListItem>11:00</asp:ListItem>
+                    <asp:ListItem>11:30</asp:ListItem>
+                    <asp:ListItem>14:00</asp:ListItem>
+                    <asp:ListItem>14:30</asp:ListItem>
+                    <asp:ListItem>15:00</asp:ListItem>
+                    <asp:ListItem>15:30</asp:ListItem>
+                    <asp:ListItem>16:00</asp:ListItem>
+                    <asp:ListItem>16:30</asp:ListItem>
+                </asp:DropDownList>
                 <label>Horário</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <select>
-                  <option value="" disabled selected>Escolha a duração</option>
-                  <option value="1">30 min</option>
-                  <option value="1">60 min</option>
-                </select>
+                <asp:DropDownList runat="server" id="txtDuracao">
+                    <asp:ListItem disabled>Escolha a duração</asp:ListItem>
+                    <asp:ListItem>30 min</asp:ListItem>
+                    <asp:ListItem>60 min</asp:ListItem>
+                </asp:DropDownList>
                 <label>Duração</label>
             </div>
         </div>
-        <center><asp:Button ID="btnSubmit" runat="server" Text="Submeter" class="waves-effect waves-light btn-large green darken-1"  OnClick="btnSubmit_Click" /></center>
+        <center><asp:Button ID="btnSubmit" runat="server" Text="Submeter" class="waves-effect waves-light btn-large green darken-1" OnClick="btn_Submit_Click" /></center>
     </div>
 </asp:Content>

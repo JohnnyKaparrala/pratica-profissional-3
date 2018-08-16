@@ -94,11 +94,32 @@ namespace Pratica_III
                     int iByteRead = fs.Read(vetorImagem, 0, Convert.ToInt32(tamanhoArquivoImagem));
                     fs.Close();
 
+                    SqlCommand sqlcmd = new SqlCommand();
+                    myConnection = new SqlConnection(conString);
+                    myConnection.Open();
+                    sqlcmd.Connection = myConnection;
+
+                    sqlcmd.CommandText = "SELECT ID FROM ESPECIALIDADE_MEDICO WHERE NOME = @NOME_ESPEC";
+                    sqlcmd.Parameters.AddWithValue("@NOME_ESPEC", selEsp.Text);
+                    SqlDataReader reader = sqlcmd.ExecuteReader();
+                    int esp = -1;
+
+                    while (reader.Read())
+                    {
+                        esp = Convert.ToInt32(reader.GetValue(0).ToString());
+                    }
+
+                    if (esp == -1)
+                    {
+
+                    }
+                    reader.Close();
+
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
-                        sqlCmd.CommandText = "INSERT INTO PACIENTE(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL, @FOTO)";
+                        sqlCmd.CommandText = "INSERT INTO MEDICO(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO, ID_ESPECIALIDADE_MEDICO) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL,@FOTO,@ID_ESPECIALIDADE_MEDICO)";
 
                         sqlCmd.Parameters.AddWithValue("@NOME", txtNome.Text);
                         sqlCmd.Parameters.AddWithValue("@EMAIL", txtEmail.Text);
@@ -106,6 +127,7 @@ namespace Pratica_III
                         sqlCmd.Parameters.AddWithValue("@TELEFONE_RESIDENCIAL", txtTelefoneRes.Text);
                         sqlCmd.Parameters.AddWithValue("@FOTO", vetorImagem);
                         sqlCmd.Parameters.AddWithValue("@ANIVERSARIO", txtNiver.Text);
+                        sqlCmd.Parameters.AddWithValue("@ID_ESPECIALIDADE_MEDICO", esp);
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();

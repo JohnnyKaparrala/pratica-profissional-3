@@ -7,11 +7,11 @@
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
-                    <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Nome do paciente">account_circle</i>
+                    <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Nome do médico">account_circle</i>
                     <asp:TextBox placeholder="Nome" runat="server" id="txtNome" type="text" class="validate"></asp:TextBox>
                 </div>
                 <div class="input-field col s6">
-                    <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Email do paciente">contact_mail</i>
+                    <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Email do médico">contact_mail</i>
                     <asp:TextBox placeholder="Email" runat="server" id="txtEmail" type="email" class="validate"></asp:TextBox>
                     <span class="helper-text" data-error="wrong" data-success="right"></span>
                 </div>
