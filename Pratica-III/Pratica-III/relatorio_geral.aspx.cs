@@ -4,14 +4,64 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Configuration;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using Pratica_III.App_Start;
+using System.IO;
+using System.Drawing;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Pratica_III
 {
     public partial class relatorio_geral : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        conexaoBD acessoBD;
+        String conString;
+
+        protected void limparInputs()
         {
 
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+
+                SqlCommand sqlCmd = new SqlCommand();
+                SqlConnection myConnection;
+                myConnection = new SqlConnection(conString);
+                myConnection.Open();
+                sqlCmd.Connection = myConnection;
+
+                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, C.DURACAO, M.NOME, P.NOME, CONCLUIDA FROM
+CONSULTA C,
+PACIENTE P,
+MEDICO M WHERE
+M.ID = C.ID_MEDICO AND
+P.ID = C.ID_PACIENTE AND
+C.HORARIO BETWEEN '2018-08-18 00:00:00.0000' AND '2018-08-18 00:00:00.0000'";
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    selEsp.Items.Insert(0, new ListItem(reader.GetValue(0).ToString()));
+                }
+            }
+            catch (Exception er)
+            {
+                txtNome.Text = er.Message;
+            }
+
+            acessoBD.FecharConexao();
         }
     }
 }
