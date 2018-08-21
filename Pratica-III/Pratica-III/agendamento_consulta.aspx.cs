@@ -20,11 +20,20 @@ namespace Pratica_III
 
         }
 
-        protected void limparInputs ()
+        protected void limparInputs()
         {
             txtData.Text = "";
             txtEmailMedico.Text = "";
             txtEmailPaciente.Text = "";
+        }
+
+        protected string prox_horario(string hor)
+        {
+            DateTime d1 = DateTime.Parse(hor);
+            DateTime d2;
+            d2 = DateTime.Parse("00:30:00");
+            DateTime d3 = d1.Add(d2.TimeOfDay);
+            return d3.TimeOfDay.ToString();
         }
 
         protected void btn_Submit_Click(object sender, EventArgs e)
@@ -77,12 +86,13 @@ namespace Pratica_III
 
                     if (p_id == -1)
                     {
-
+                        throw new Exception("Paciente não encontrado.");
                     }
                     if (m_id == -1)
                     {
-
+                        throw new Exception("Médico não encontrado.");
                     }
+
                     int dur = -1;
                     switch (txtDuracao.Text)
                     {
@@ -98,13 +108,43 @@ namespace Pratica_III
                             throw new Exception("");//TODO
                     }
 
+                    string horario = txtData.Text + " " + txtHor.Text;
+
+                    sqlcmd.CommandText = "SELECT HORARIO FROM CONSULTA WHERE ID_MEDICO = 1 AND HORARIO BETWEEN (@DIA) AND (@DIA_SEGUINTE)";
+                    sqlcmd.Parameters.AddWithValue("@DIA", txtData.Text + " 00:00:00.000");
+                    sqlcmd.Parameters.AddWithValue("@DIA_SEGUINTE", txtData.Text + " 23:59:59.999");
+                    sqlcmd.Parameters.AddWithValue("@HORARIO", horario + ".000");
+                    sqlcmd.Parameters.AddWithValue("@ID_MED", m_id);
+                    reader = sqlcmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string horario_autal = reader.GetValue(0).ToString().Substring((reader.GetValue(0).ToString()).Length - 8);
+                        if (dur == 1)
+                        {
+                            if ((prox_horario(txtHor.Text + ":00") == horario_autal))
+                                throw new Exception("Médico já está ocupado neste horário.");
+                        }
+                        else
+                        if (txtHor.Text + ":00" == horario_autal)
+                        {
+                            throw new Exception("Médico já está ocupado neste horário.");
+                        }
+                    }
+                    reader.Close();
+
+                    if (dur == 1 && (txtHor.Text == "11:30" || txtHor.Text == "16:30"))
+                    {
+                        throw new Exception("A duração é muito grande para o horário escolhido");
+                    }
+
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
                         sqlCmd.CommandText = "INSERT INTO CONSULTA(HORARIO, ID_PACIENTE, ID_MEDICO, CONCLUIDA, ANOTACOES, DURACAO) VALUES (@HORARIO,@ID_PACIENTE,@ID_MEDICO,0, NULL, @DURACAO)";
 
-                        sqlCmd.Parameters.AddWithValue("@HORARIO", txtData.Text);
+                        sqlCmd.Parameters.AddWithValue("@HORARIO", horario);
                         sqlCmd.Parameters.AddWithValue("@ID_PACIENTE", p_id);
                         sqlCmd.Parameters.AddWithValue("@ID_MEDICO", m_id);
                         sqlCmd.Parameters.AddWithValue("@DURACAO", dur);
@@ -112,12 +152,12 @@ namespace Pratica_III
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta agendada com sucesso!'});", true);
-                    limparInputs();
                 }
                 catch (Exception er)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Ocorreu um erro durante a operação!'});", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
                 }
+                limparInputs();
                 acessoBD.FecharConexao();
             }
         }

@@ -22,8 +22,8 @@
                 <asp:TextBox placeholder="Dia" runat="server"  id="txtData" type="text" class="datepicker"></asp:TextBox>
             </div>
             <div class="input-field col s6">
-                <asp:DropDownList runat="server" id="selEsp">
-                    <asp:ListItem disabled>Escolha a especialidade</asp:ListItem>
+                <asp:DropDownList runat="server" id="txtHor">
+                    <asp:ListItem disabled>Escolha o horário</asp:ListItem>
                     <asp:ListItem>09:00</asp:ListItem>
                     <asp:ListItem>09:30</asp:ListItem>
                     <asp:ListItem>10:00</asp:ListItem>

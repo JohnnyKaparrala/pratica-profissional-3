@@ -42,23 +42,31 @@ namespace Pratica_III
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
 
-                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, C.DURACAO, M.NOME, P.NOME, CONCLUIDA FROM
-CONSULTA C,
-PACIENTE P,
-MEDICO M WHERE
-M.ID = C.ID_MEDICO AND
-P.ID = C.ID_PACIENTE AND
-C.HORARIO BETWEEN '2018-08-18 00:00:00.0000' AND '2018-08-18 00:00:00.0000'";
+                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, C.DURACAO, M.NOME, P.NOME, CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE M.ID = C.ID_MEDICO AND P.ID = C.ID_PACIENTE AND C.HORARIO BETWEEN @DIA_ANTERIOR AND @DIA_POSTERIOR";
+                DateTime hj = DateTime.Now;
+                sqlCmd.Parameters.AddWithValue("@DIA_ANTERIOR", hj.ToString("dd-M-yyyy"));//'2018-08-18 00:00:00.0000'
+                sqlCmd.Parameters.AddWithValue("@DIA_POSTERIOR", hj.AddDays(1).ToString("dd-M-yyyy"));
                 SqlDataReader reader = sqlCmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    selEsp.Items.Insert(0, new ListItem(reader.GetValue(0).ToString()));
+                    string val = "✕";
+                    if (reader.GetValue(5).ToString() == "1")
+                    {
+                        val = "✓";
+                    }
+                    string val2 = "60 min";
+                    if (reader.GetValue(5).ToString() == "0")
+                    {
+                        val2 = "30 min";
+                    }
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + val2 + "</td><td>" + reader.GetValue(3).ToString() + "</td><td>" + reader.GetValue(4).ToString() + "</td><td>" + val + "</td></tr>";
                 }
+                
             }
             catch (Exception er)
             {
-                txtNome.Text = er.Message;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Ocorreu um erro durante a operação!'});", true);
             }
 
             acessoBD.FecharConexao();
