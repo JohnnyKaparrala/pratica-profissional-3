@@ -51,14 +51,14 @@ namespace Pratica_III
                 while (reader.Read())
                 {
                     string val = "✕";
-                    if (reader.GetValue(5).ToString() == "1")
+                    if (reader.GetValue(5).ToString() == "True")
                     {
                         val = "✓";
                     }
-                    string val2 = "60 min";
-                    if (reader.GetValue(5).ToString() == "0")
+                    string val2 = "30 min";
+                    if (reader.GetValue(2).ToString() == "True")
                     {
-                        val2 = "30 min";
+                        val2 = "60 min";
                     }
                     tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + val2 + "</td><td>" + reader.GetValue(3).ToString() + "</td><td>" + reader.GetValue(4).ToString() + "</td><td>" + val + "</td></tr>";
                 }
