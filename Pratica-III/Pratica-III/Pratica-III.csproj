@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="agendamento_consulta.aspx" />
+    <Content Include="cadastro.aspx" />
     <Content Include="cadastro_consulta.aspx" />
     <Content Include="cadastro_especialidade.aspx" />
     <Content Include="cadastro_medico.aspx" />
@@ -233,6 +234,13 @@
     </Compile>
     <Compile Include="App_Start\conexaoBD.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="cadastro.aspx.cs">
+      <DependentUpon>cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cadastro.aspx.designer.cs">
+      <DependentUpon>cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="cadastro_consulta.aspx.cs">
       <DependentUpon>cadastro_consulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
