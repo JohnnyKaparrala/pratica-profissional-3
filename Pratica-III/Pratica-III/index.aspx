@@ -7,9 +7,9 @@
         <div class="parallax-container">
             <div class="section no-pad-bot no-pad-top">
               <div class="container">
-                <h1 class="header center green-text">Clínica Belly</h1>
+                <h1 class="header center green-text">Clínica Mercy</h1>
                 <div class="row center">
-                  <h5 class="header col s12 white-text">Clinica top</h5>
+                  <h5 class="header col s12 white-text light">Venha se juntar a mais de 50.000 pacientes por hora. E temos orgulho de nossos profissionais altamente especializados.</h5>
                 </div>
               </div>
             </div>
@@ -19,7 +19,6 @@
         </div>
     </div>
     <div class="section container">
-        <h3>Sobre nós</h3>
-        <p>Nós da Clinícas Belly fazemos várias consultas todos os dias e temos orgulho de nossas instalações e de nossos mais de 80.000.000.000 de pacientes satisfeitos</p>
+        <blockquote style="border-left-color: #4CAF50" class="flow-text">Nós da Clinícas Belly fazemos várias consultas todos os dias e temos orgulho de nossas instalações e de nossos mais de 80.000.000.000 de pacientes diários satisfeitos</blockquote>
     </div>
 </asp:Content>

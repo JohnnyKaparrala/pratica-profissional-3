@@ -36,7 +36,7 @@
             <li id="agendamento-menu"><a href="agendamento_consulta.aspx">Agendamentos de consulta</a></li>
             <li id="cadastro-menu"><a class="dropdown-trigger" data-target="cadastros-drop">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
             <li id="relatorio-menu"><a class="dropdown-trigger" data-target="relatorios-drop">Relatórios<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li id="login-menu"><a href="login.aspx" style="">Logout</a></li>
+            <li id="login-menu"><a href="login_geral.aspx" style="">Login</a></li>
         </ul>
       </div>
     </nav>

@@ -16,4 +16,5 @@
         yearRange: 100
     });
     $('select').formSelect();
+    $('i.btn-large').click(function (e) {$(this).children()[0].click() });
 });

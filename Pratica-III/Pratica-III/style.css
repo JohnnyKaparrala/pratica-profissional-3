@@ -1,1 +1,11 @@
-﻿
+﻿.tooltipped {
+    cursor : default;
+}
+
+.btn-large {
+    color : white !important;
+}
+.waves-button-input {
+    cursor: pointer;
+    color : white !important;
+}

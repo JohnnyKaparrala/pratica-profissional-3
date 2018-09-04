@@ -45,17 +45,18 @@ namespace Pratica_III
             conexaoBD acessoBD = new conexaoBD();
             acessoBD.Connection(conString);
             acessoBD.AbrirConexao();
-
-            if (txtEmailMedico.Text == "" || txtEmailPaciente.Text == "" || txtData.Text == "" || txtDuracao.Text == "")
+            try
             {
-                //TODO aparecer o alert falando pra preencher tudo
-            }
-            else
-            {
-                //TODO ver se dados estão formatados corretamente
-                byte[] vetorImagem;
-                try
+                if (txtEmailMedico.Text == "" || txtEmailPaciente.Text == "" || txtData.Text == "" || txtDuracao.Text == "")
                 {
+                    //TODO aparecer o alert falando pra preencher tudo
+                    throw new Exception("Preencha todos os campos");
+                }
+                else
+                {
+                    //TODO ver se dados estão formatados corretamente
+                    byte[] vetorImagem;
+
                     SqlConnection myConnection;
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
@@ -153,13 +154,13 @@ namespace Pratica_III
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta agendada com sucesso!'});", true);
                 }
-                catch (Exception er)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
-                }
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
+            }
                 limparInputs();
                 acessoBD.FecharConexao();
             }
         }
     }
-}
