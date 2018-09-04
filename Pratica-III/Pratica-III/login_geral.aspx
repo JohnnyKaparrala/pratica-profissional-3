@@ -12,7 +12,7 @@
                     </div>           
                     <div class="input-field col s6">
                         <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Senha do Cadastro">lock</i>
-                        <asp:TextBox placeholder="Senha" runat="server" id="txtSenha" type="" class="validate"></asp:TextBox>
+                        <asp:TextBox placeholder="Senha" runat="server" id="txtSenha" type="password" class="validate"></asp:TextBox>
                     </div>
                 </div>
                 <br />  

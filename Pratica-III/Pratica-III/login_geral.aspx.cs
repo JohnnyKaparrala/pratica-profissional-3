@@ -27,55 +27,81 @@ namespace Pratica_III
         }
 
         protected void btnCadastrar_Click(object sender, EventArgs e)
-        {          
-
-            if(String.IsNullOrEmpty(txtEmail.Text) || String.IsNullOrEmpty(txtSenha.Text))
+        {
+            try
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Preencha os dados corretamente'});", true);
-                return;
-            }
+                if (String.IsNullOrEmpty(txtEmail.Text) || String.IsNullOrEmpty(txtSenha.Text))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Preencha os dados corretamente'});", true);
+                    return;
+                }
 
-            String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-            conexaoBD acessoBD = new conexaoBD();
-            acessoBD.Connection(conString);
-            acessoBD.AbrirConexao();
+                SqlConnection myConnection;
+                myConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString);
+                myConnection.Open();
+                String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                conexaoBD acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+                SqlCommand sqlcmd = new SqlCommand();
+                myConnection = new SqlConnection(conString);
+                myConnection.Open();
+                sqlcmd.Connection = myConnection;
 
-            String senha = Hash(txtSenha.Text);
-            String sql;
-            int res;
+                String sql;
+                int res;
 
-            //começa verificando se é secretária
-            sql = String.Format("SELECT SENHA FROM ADM WHERE NOME = '{0}' AND SENHA = '{1}'",txtEmail.Text, senha);
-            res = acessoBD.ExecutarConsulta(sql);
-            if (res > 0) //tem cadastro
+                //começa verificando se é secretária
+                sqlcmd.CommandText = "SELECT TOP 1 1 FROM ADM WHERE NOME = @NOME AND SENHA = @SENHA";
+                sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
+                sqlcmd.Parameters.AddWithValue("@SENHA", txtSenha.Text);
+                SqlDataReader reader = sqlcmd.ExecuteReader();
+                int val = -1;
+                reader.Read();
+                val = Convert.ToInt32(reader.GetValue(0).ToString());
+                reader.Close();
+
+                if (val == 1) //tem cadastro
+                {
+                    Session["cargo"] = 0;
+                    Response.Redirect("index.aspx");
+                }
+                else
+                {
+                    throw new Exception("Cadastro inválido.");
+                }
+
+                String senha = Hash(txtSenha.Text);//criptografa a senha
+                /*
+                //verificar se é médico
+                sql = String.Format("SELECT SENHA FROM MEDICO WHERE EMAIL = '{0}' AND SENHA = '{1}'", txtEmail.Text, senha);
+                res = acessoBD.ExecutarConsulta(sql);
+                if (res > 0) //tem cadastro
+                {
+                    Session["cargo"] = 1;
+                    Response.Redirect("index.aspx");
+                }
+
+                //verificar se é paciente
+                sql = String.Format("SELECT SENHA FROM PACIENTE WHERE EMAIL = '{0}' AND SENHA = '{1}'", txtEmail.Text, senha);
+                res = acessoBD.ExecutarConsulta(sql);
+                if (res > 0) //tem cadastro
+                {
+                    Session["cargo"] = 2;
+                    Response.Redirect("index.aspx");
+                }
+            */
+            } catch (Exception er)
             {
-                Session["cargo"] = 0;
-                Response.Redirect("index.aspx");
-                return;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
-
-            //verificar se é médico
-            sql = String.Format("SELECT SENHA FROM MEDICO WHERE EMAIL = '{0}' AND SENHA = '{1}'", txtEmail.Text, senha);
-            res = acessoBD.ExecutarConsulta(sql);
-            if (res > 0) //tem cadastro
-            {
-                Session["cargo"] = 1;
-                Response.Redirect("index.aspx");
-                return;
-            }
-
-            //verificar se é paciente
-            sql = String.Format("SELECT SENHA FROM PACIENTE WHERE EMAIL = '{0}' AND SENHA = '{1}'", txtEmail.Text, senha);
-            res = acessoBD.ExecutarConsulta(sql);
-            if (res > 0) //tem cadastro
-            {
-                Session["cargo"] = 2;
-                Response.Redirect("index.aspx");
-                return;
-            }
-
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Você não possui cadastro'});", true);
         }
+
+        /*
+         0: secretaria
+         1: medico
+         2: paciente
+        */
 
         static string Hash(string input)
         {

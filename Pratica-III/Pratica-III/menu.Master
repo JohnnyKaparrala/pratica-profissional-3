@@ -31,12 +31,7 @@
     <nav class="green lighten-2">
       <div class="nav-wrapper container">
         <a href="#!" class="brand-logo"><img src="logo.png" height="64px"/></a>
-        <ul class="right hide-on-med-and-down" runat="server">
-            <li id="home-menu"><a href="index.aspx">Home</a></li>
-            <li id="agendamento-menu"><a href="agendamento_consulta.aspx">Agendamentos de consulta</a></li>
-            <li id="cadastro-menu"><a class="dropdown-trigger" data-target="cadastros-drop">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li id="relatorio-menu"><a class="dropdown-trigger" data-target="relatorios-drop">Relatórios<i class="material-icons right">arrow_drop_down</i></a></li>
-            <li id="login-menu"><a href="login_geral.aspx" style="">Login</a></li>
+        <ul id="h_menu" class="right hide-on-med-and-down" runat="server">
         </ul>
       </div>
     </nav>
