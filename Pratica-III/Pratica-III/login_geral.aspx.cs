@@ -64,6 +64,7 @@ namespace Pratica_III
                 if (val == 1) //tem cadastro
                 {
                     Session["cargo"] = 0;
+                    Session["wel"] = true;
                     Response.Redirect("index.aspx");
                 }
                 else

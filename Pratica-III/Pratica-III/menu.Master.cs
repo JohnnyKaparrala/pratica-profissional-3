@@ -51,7 +51,9 @@ namespace Pratica_III
             else
             {
                 add += "<li><a href=\"logout.aspx\">Logout</a></li>";
-                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Bem-vindo(a)!'});", true);
+                if (Convert.ToBoolean(Session["wel"]))
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Bem-vindo(a)!'});", true);
+                Session["wel"] = false;
             }
 
             h_menu.InnerHtml = "<li><a href=\"index.aspx\">Home</a></li>" + add;
