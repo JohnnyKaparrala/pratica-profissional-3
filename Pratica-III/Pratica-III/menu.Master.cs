@@ -28,13 +28,13 @@ namespace Pratica_III
 
                 case 1:
                     {
-                        add += "<li><a href=\"cadastro_consulta.aspx\">cadastro consulta</a></li>";
+                        add += "<li><a href=\"cadastro_consulta.aspx\">Cadastro consulta</a></li>";
                     }
                     break;
 
                 case 2:
                     {
-                        add += "<li><a href=\"cadastro_consulta.aspx\">cadastro consulta</a></li>";
+                        add += "<li><a href=\"a.aspx\">Avaliação de consulta</a></li>";
                     }
                     break;
                     
@@ -44,7 +44,10 @@ namespace Pratica_III
                     } break;
             }
             if (Session["cargo"] == null)
+            {
+                add += "<li><a href=\"a.aspx\">Contato</a></li>";
                 add += "<li><a href=\"login_geral.aspx\">Login</a></li>";
+            }
             else
             {
                 add += "<li><a href=\"logout.aspx\">Logout</a></li>";
