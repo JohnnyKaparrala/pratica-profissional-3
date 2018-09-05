@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="agendamento_consulta.aspx" />
+    <Content Include="contato.aspx" />
     <Content Include="login_geral.aspx" />
     <Content Include="cadastro_consulta.aspx" />
     <Content Include="cadastro_especialidade.aspx" />
@@ -172,6 +173,7 @@
     <Content Include="injecao.jpg" />
     <Content Include="jquery.js" />
     <Content Include="logo.png" />
+    <Content Include="logout.aspx" />
     <Content Include="menu.Master" />
     <Content Include="icons.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -234,6 +236,13 @@
     </Compile>
     <Compile Include="App_Start\conexaoBD.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="contato.aspx.cs">
+      <DependentUpon>contato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contato.aspx.designer.cs">
+      <DependentUpon>contato.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login_geral.aspx.cs">
       <DependentUpon>login_geral.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +301,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="menu.Master.cs">
       <DependentUpon>menu.Master</DependentUpon>

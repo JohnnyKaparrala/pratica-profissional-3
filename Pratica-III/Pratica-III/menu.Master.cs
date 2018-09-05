@@ -45,7 +45,7 @@ namespace Pratica_III
             }
             if (Session["cargo"] == null)
             {
-                add += "<li><a href=\"a.aspx\">Contato</a></li>";
+                add += "<li><a href=\"contato.aspx\">Contato</a></li>";
                 add += "<li><a href=\"login_geral.aspx\">Login</a></li>";
             }
             else

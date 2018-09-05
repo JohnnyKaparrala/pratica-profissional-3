@@ -31,24 +31,26 @@ namespace Pratica_III
 
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
-            // associando a string de conexao com o BD com o configurado no WebConfig
-            String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+            try
+            {
+                // associando a string de conexao com o BD com o configurado no WebConfig
+                String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
 
-            // instanciar a classe conexaoBD
-            conexaoBD acessoBD = new conexaoBD();
-            acessoBD.Connection(conString);
-            acessoBD.AbrirConexao();
-            
-            if (txtEmail.Text == "" || txtNiver.Text == "" || txtNome.Text == "" || txtTelefoneCel.Text == "" || txtTelefoneRes.Text == "")
-            {
-                //TODO aparecer o alert falando pra preencher tudo
-            }
-            else
-            {
-                //TODO ver se dados estão formatados corretamente
-                byte[] vetorImagem;
-                try
+                // instanciar a classe conexaoBD
+                conexaoBD acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+
+                if (txtEmail.Text == "" || txtNiver.Text == "" || txtNome.Text == "" || txtTelefoneCel.Text == "" || txtTelefoneRes.Text == "")
                 {
+                    throw new Exception("Preencha todos os campos.");
+                }
+                else
+                {
+                    //TODO ver se o email existe e mandar
+                    //TODO ver se dados estão formatados corretamente
+                    byte[] vetorImagem;
+
                     SqlConnection myConnection;
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
@@ -73,7 +75,7 @@ namespace Pratica_III
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
-                    {
+                    {//TODO inserir senha
                         sqlCmd.CommandText = "INSERT INTO PACIENTE(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL, @FOTO)";
 
                         sqlCmd.Parameters.AddWithValue("@NOME", txtNome.Text);
@@ -83,16 +85,16 @@ namespace Pratica_III
                         sqlCmd.Parameters.AddWithValue("@FOTO", vetorImagem);
                         sqlCmd.Parameters.AddWithValue("@ANIVERSARIO", txtNiver.Text);
                     }
-                    
+
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Paciente registrado com sucesso!'});", true);
                     limparInputs();
                 }
-                catch (Exception er)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Ocorreu um erro durante a operação!'});", true);
-                }
                 acessoBD.FecharConexao();
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
         }
     }
