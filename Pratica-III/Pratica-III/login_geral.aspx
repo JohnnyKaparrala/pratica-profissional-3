@@ -18,6 +18,17 @@
                             <asp:TextBox placeholder="Senha" runat="server" id="txtSenha" type="password" class="validate"></asp:TextBox>
                         </div>
                     </div>
+                    <div class="row section">
+                        <div class="input-field col s12">
+                            <asp:DropDownList runat="server" id="cargo">
+                                <asp:ListItem disabled>Escolha o cargo</asp:ListItem>
+                                <asp:ListItem>Administrador</asp:ListItem>
+                                <asp:ListItem>Médico</asp:ListItem>
+                                <asp:ListItem>Paciente</asp:ListItem>
+                            </asp:DropDownList>
+                            <label>Cargo</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="section">
                     <center><asp:Button ID="btnCadastrar" runat="server" Text="Entrar" class="waves-effect waves-light btn-large green darken-1" OnClick="btnCadastrar_Click" /></center>

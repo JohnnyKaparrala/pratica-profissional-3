@@ -31,6 +31,15 @@ namespace Pratica_III {
         protected global::System.Web.UI.WebControls.TextBox txtSenha;
         
         /// <summary>
+        /// Controle cargo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cargo;
+        
+        /// <summary>
         /// Controle btnCadastrar.
         /// </summary>
         /// <remarks>

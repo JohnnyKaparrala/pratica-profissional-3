@@ -29,6 +29,12 @@ namespace Pratica_III
 
         }
 
+        static string Hash(string input)
+        {
+            var hash = (new System.Security.Cryptography.SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
+        }
+
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
             try
@@ -58,7 +64,7 @@ namespace Pratica_III
                     string strArq = txtFoto.Text;
 
                     if (string.IsNullOrEmpty(strArq))
-                        throw new Exception("a");
+                        throw new Exception("Caminho de arquivo inválido!");
 
                     // transformar imagem em vetor de byte para colocar no BD
                     FileInfo arqImagem = new FileInfo(strArq);
@@ -74,9 +80,14 @@ namespace Pratica_III
 
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = myConnection;
+
+                    string senha;
+                    senha = System.Web.Security.Membership.GeneratePassword(10, 0);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:console.log(\"" + senha + "\");", true);
+                    //TODO mandar email pra o cara (antes de inserir no BD)
                     if (sqlCmd.Parameters.Count == 0)
-                    {//TODO inserir senha
-                        sqlCmd.CommandText = "INSERT INTO PACIENTE(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL, @FOTO)";
+                    {
+                        sqlCmd.CommandText = "INSERT INTO PACIENTE(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO, SENHA) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL, @FOTO, @SENHA)";
 
                         sqlCmd.Parameters.AddWithValue("@NOME", txtNome.Text);
                         sqlCmd.Parameters.AddWithValue("@EMAIL", txtEmail.Text);
@@ -84,6 +95,7 @@ namespace Pratica_III
                         sqlCmd.Parameters.AddWithValue("@TELEFONE_RESIDENCIAL", txtTelefoneRes.Text);
                         sqlCmd.Parameters.AddWithValue("@FOTO", vetorImagem);
                         sqlCmd.Parameters.AddWithValue("@ANIVERSARIO", txtNiver.Text);
+                        sqlCmd.Parameters.AddWithValue("@SENHA", conexaoBD.Hash(senha));
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();

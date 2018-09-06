@@ -123,5 +123,11 @@ namespace Pratica_III.App_Start
                 return 0;
             }
         }
+
+        public static string Hash(string input)
+        {
+            var hash = (new System.Security.Cryptography.SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
+        }
     }
 }

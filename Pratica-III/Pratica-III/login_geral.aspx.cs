@@ -8,7 +8,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using Pratica_III.App_Start;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Pratica_III
@@ -51,63 +50,73 @@ namespace Pratica_III
                 String sql;
                 int res;
 
-                //começa verificando se é secretária
-                sqlcmd.CommandText = "SELECT TOP 1 1 FROM ADM WHERE NOME = @NOME AND SENHA = @SENHA";
-                sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
-                sqlcmd.Parameters.AddWithValue("@SENHA", txtSenha.Text);
-                SqlDataReader reader = sqlcmd.ExecuteReader();
-                int val = -1;
-                reader.Read();
-                val = Convert.ToInt32(reader.GetValue(0).ToString());
-                reader.Close();
-
-                if (val == 1) //tem cadastro
+                try
                 {
-                    Session["cargo"] = 0;
-                    Session["wel"] = true;
-                    Response.Redirect("index.aspx");
-                }
-                else
-                {
-                    throw new Exception("Cadastro inválido.");
-                }
+                    switch (cargo.SelectedIndex)
+                    {
+                        case 1://adm
+                            {
+                                //começa verificando se é secretária
+                                sqlcmd.CommandText = "SELECT TOP 1 1 FROM ADM WHERE NOME = @NOME AND SENHA = @SENHA";
+                                sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA", txtSenha.Text);
+                                SqlDataReader reader = sqlcmd.ExecuteReader();
+                                int val = -1;
+                                reader.Read();
+                                val = Convert.ToInt32(reader.GetValue(0).ToString());
+                                reader.Close();
+                            }
+                            break;
 
-                String senha = Hash(txtSenha.Text);//criptografa a senha
+                        case 2://medc
+                            {
+                                sqlcmd.CommandText = "SELECT TOP 1 1 FROM MEDICO WHERE EMAIL = @NOME AND SENHA = @SENHA";
+                                sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA", conexaoBD.Hash(txtSenha.Text));
+                                SqlDataReader reader = sqlcmd.ExecuteReader();
+                                int val = -1;
+                                reader.Read();
+                                val = Convert.ToInt32(reader.GetValue(0).ToString());
+                                reader.Close();
+                            }
+                            break;
+
+                        case 3://paciente
+                            {
+                                sqlcmd.CommandText = "SELECT TOP 1 1 FROM PACIENTE WHERE EMAIL = @NOME AND SENHA = @SENHA";
+                                sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA", conexaoBD.Hash(txtSenha.Text));
+                                SqlDataReader reader = sqlcmd.ExecuteReader();
+                                int val = -1;
+                                reader.Read();
+                                val = Convert.ToInt32(reader.GetValue(0).ToString());
+                                reader.Close();
+                            }
+                            break;
+
+                        default:
+                            {
+                                throw new Exception("Index inválido.");
+                            }
+                            break;
+                    }
+                } catch (InvalidOperationException er)
+                {
+                    throw new Exception("Cadastro inválido!");
+                }
+                Session["cargo"] = cargo.SelectedIndex - 1;
                 /*
-                //verificar se é médico
-                sql = String.Format("SELECT SENHA FROM MEDICO WHERE EMAIL = '{0}' AND SENHA = '{1}'", txtEmail.Text, senha);
-                res = acessoBD.ExecutarConsulta(sql);
-                if (res > 0) //tem cadastro
-                {
-                    Session["cargo"] = 1;
-                    Response.Redirect("index.aspx");
-                }
-
-                //verificar se é paciente
-                sql = String.Format("SELECT SENHA FROM PACIENTE WHERE EMAIL = '{0}' AND SENHA = '{1}'", txtEmail.Text, senha);
-                res = acessoBD.ExecutarConsulta(sql);
-                if (res > 0) //tem cadastro
-                {
-                    Session["cargo"] = 2;
-                    Response.Redirect("index.aspx");
-                }
-            */
-            } catch (Exception er)
+                 0: secretaria
+                 1: medico
+                 2: paciente
+                */
+                Session["wel"] = true;
+                Response.Redirect("index.aspx");
+            }
+            catch (Exception er)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
-        }
-
-        /*
-         0: secretaria
-         1: medico
-         2: paciente
-        */
-
-        static string Hash(string input)
-        {
-            var hash = (new SHA1Managed()).ComputeHash(Encoding.UTF8.GetBytes(input));
-            return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
         }
     }
 }
