@@ -15,40 +15,41 @@
     <script src="materialize/materialize.min.js"></script>
 </head>
 <body>
-    <ul id="cadastros-drop" class="dropdown-content">
-      <li><a href="cadastro_especialidade.aspx">Especialidade</a></li>
-      <li><a href="cadastro_paciente.aspx">Paciente</a></li>
-      <li><a href="cadastro_medico.aspx">Médico</a></li>
-      <li class="divider"></li>
-      <li><a href="cadastro_consulta.aspx">Consulta</a></li>
-    </ul>
-    <ul id="relatorios-drop" class="dropdown-content">
-      <li><a href="relatorio_geral.aspx">Números de consulta</a></li>
-      <li><a href="relatorio_paciente.aspx">Consultas de usuário</a></li>
-      <li class="divider"></li>
-      <li><a href="relatorio_medicao.aspx">Medição</a></li>
-    </ul>
-    <nav class="green lighten-2">
-      <div class="nav-wrapper container">
-        <a href="#!" class="brand-logo"><img src="logo.png" height="64px"/></a>
-        <ul id="h_menu" class="right hide-on-med-and-down" runat="server">
+    <header>
+        <ul id="cadastros-drop" class="dropdown-content">
+          <li><a href="cadastro_especialidade.aspx">Especialidade</a></li>
+          <li><a href="cadastro_paciente.aspx">Paciente</a></li>
+          <li><a href="cadastro_medico.aspx">Médico</a></li>
+          <li class="divider"></li>
+          <li><a href="cadastro_consulta.aspx">Consulta</a></li>
         </ul>
-      </div>
-    </nav>
-    <div>
+        <ul id="relatorios-drop" class="dropdown-content">
+          <li><a href="relatorio_geral.aspx">Números de consulta</a></li>
+          <li><a href="relatorio_paciente.aspx">Consultas de usuário</a></li>
+          <li class="divider"></li>
+          <li><a href="relatorio_medicao.aspx">Medição</a></li>
+        </ul>
+        <nav class="green lighten-2">
+          <div class="nav-wrapper container">
+            <a href="#!" class="brand-logo"><img src="logo.png" height="64px"/></a>
+            <ul id="h_menu" class="right hide-on-med-and-down" runat="server">
+            </ul>
+          </div>
+        </nav>
+    </header>
+    <main>
         <form id="form1" runat="server">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </form>
-    </div>
+    </main>
     <footer class="page-footer green lighten-1">
-          <div class="footer-copyright">
+        <div class="footer-copyright">
             <div class="container">
-            © 2018 copyright
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                © 2018 copyright <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
-          </div>
-        </footer>
+        </div>
+    </footer>
 </body>
     <script src="script.js"></script>
 </html>

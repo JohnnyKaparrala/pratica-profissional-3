@@ -31,24 +31,25 @@ namespace Pratica_III
 
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
-            // associando a string de conexao com o BD com o configurado no WebConfig
-            String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+            try
+            {
+                // associando a string de conexao com o BD com o configurado no WebConfig
+                String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
 
-            // instanciar a classe conexaoBD
-            conexaoBD acessoBD = new conexaoBD();
-            acessoBD.Connection(conString);
-            acessoBD.AbrirConexao();
-            
-            if (txtEsp.Text == "")
-            {
-                //TODO aparecer o alert falando pra preencher tudo
-            }
-            else
-            {
-                //TODO ver se dados estão formatados corretamente
-                
-                try
+                // instanciar a classe conexaoBD
+                conexaoBD acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+
+                if (txtEsp.Text == "")
                 {
+                    throw new Exception("Preencha todos os campos!");
+                }
+                else
+                {
+                    //TODO ver se dados estão formatados corretamente
+
+
                     SqlConnection myConnection;
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
@@ -58,18 +59,18 @@ namespace Pratica_III
                     if (sqlCmd.Parameters.Count == 0)
                     {
                         sqlCmd.CommandText = "INSERT INTO ESPECIALIDADE_MEDICO(NOME) VALUES (@NOME)";
-                        
+
                         sqlCmd.Parameters.AddWithValue("@NOME", txtEsp.Text);
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Especialidade registrada com sucesso!'});", true);
+                    acessoBD.FecharConexao();
                 }
-                catch (Exception er)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Ocorreu um erro durante a operação!'});", true);
-                }
-                acessoBD.FecharConexao();
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
         }
     }

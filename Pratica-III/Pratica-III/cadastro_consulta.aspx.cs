@@ -28,22 +28,23 @@ namespace Pratica_III
 
         protected void btn_consulta_Click(object sender, EventArgs e)
         {
-            id = "";
-            string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-            // instanciar a classe conexaoBD
-            conexaoBD acessoBD = new conexaoBD();
-            acessoBD.Connection(conString);
-            acessoBD.AbrirConexao();
+            try
+            {
+                id = "";
+                string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                // instanciar a classe conexaoBD
+                conexaoBD acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
 
-            if (txtID.Text == "")
-            {
-                //TODO aparecer o alert falando pra preencher tudo
-            }
-            else
-            {
-                //TODO ver se dados estão formatados corretamente
-                try
+                if (txtID.Text == "")
                 {
+                    throw new Exception("Preencha todos os campos!");
+                }
+                else
+                {
+                    //TODO ver se dados estão formatados corretamente
+                
                     SqlConnection myConnection;
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
@@ -73,10 +74,12 @@ namespace Pratica_III
                     {
                         //TODO
                     }
-                } catch (Exception er)
-                {
-
+                
                 }
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
             btnSubmit.Attributes["class"] = btnSubmit.Attributes["class"].Replace("disabled", "").Trim();
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta encontrada!'});", true);
@@ -84,23 +87,23 @@ namespace Pratica_III
 
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
-            // associando a string de conexao com o BD com o configurado no WebConfig
-            if (id == "")
+            try
             {
-                //TODO aparecer o alert falando pra preencher tudo
-            }
-            else
-            {
-                string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-
-                // instanciar a classe conexaoBD
-                conexaoBD acessoBD = new conexaoBD();
-                acessoBD.Connection(conString);
-                acessoBD.AbrirConexao();
-
-                //TODO ver se dados estão formatados corretamente
-                try
+                // associando a string de conexao com o BD com o configurado no WebConfig
+                if (id == "")
                 {
+                    //TODO aparecer o alert falando pra preencher tudo
+                }
+                else
+                {
+                    string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+
+                    // instanciar a classe conexaoBD
+                    conexaoBD acessoBD = new conexaoBD();
+                    acessoBD.Connection(conString);
+                    acessoBD.AbrirConexao();
+
+                    //TODO ver se dados estão formatados corretamente
                     SqlConnection myConnection;
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
@@ -123,12 +126,12 @@ namespace Pratica_III
                     //Page.ClientScript.RegisterStartupScript(this.GetType(), "myScript", "AnotherFunction();", true);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta registrada com sucesso!'});", true);
                     limparInputs();
+                    acessoBD.FecharConexao();
                 }
-                catch (Exception er)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Ocorreu um erro na operação!'});", true);
-                }
-                acessoBD.FecharConexao();
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
         }
     }

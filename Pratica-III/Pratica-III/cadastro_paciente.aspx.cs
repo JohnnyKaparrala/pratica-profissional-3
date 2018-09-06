@@ -43,7 +43,7 @@ namespace Pratica_III
 
                 if (txtEmail.Text == "" || txtNiver.Text == "" || txtNome.Text == "" || txtTelefoneCel.Text == "" || txtTelefoneRes.Text == "")
                 {
-                    throw new Exception("Preencha todos os campos.");
+                    throw new Exception("Preencha todos os campos!");
                 }
                 else
                 {

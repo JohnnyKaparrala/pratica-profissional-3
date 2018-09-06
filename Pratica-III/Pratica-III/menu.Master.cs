@@ -50,6 +50,7 @@ namespace Pratica_III
             }
             else
             {
+                add += "<li><a href=\"mudar_senha.aspx\">Mudar senha</a></li>";
                 add += "<li><a href=\"logout.aspx\">Logout</a></li>";
                 if (Convert.ToBoolean(Session["wel"]))
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Bem-vindo(a)!'});", true);

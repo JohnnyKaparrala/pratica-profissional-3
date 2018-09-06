@@ -38,19 +38,19 @@ namespace Pratica_III
 
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
-            // associando a string de conexao com o BD com o configurado no WebConfig
-            string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-
-            // instanciar a classe conexaoBD
-            conexaoBD acessoBD = new conexaoBD();
-            acessoBD.Connection(conString);
-            acessoBD.AbrirConexao();
             try
             {
+                // associando a string de conexao com o BD com o configurado no WebConfig
+                string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+
+                // instanciar a classe conexaoBD
+                conexaoBD acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+            
                 if (txtEmailMedico.Text == "" || txtEmailPaciente.Text == "" || txtData.Text == "" || txtDuracao.Text == "")
                 {
-                    //TODO aparecer o alert falando pra preencher tudo
-                    throw new Exception("Preencha todos os campos");
+                    throw new Exception("Preencha todos os campos!");
                 }
                 else
                 {
@@ -154,13 +154,13 @@ namespace Pratica_III
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta agendada com sucesso!'});", true);
                 }
+                limparInputs();
+                acessoBD.FecharConexao();
             }
             catch (Exception er)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
-                limparInputs();
-                acessoBD.FecharConexao();
-            }
         }
     }
+}

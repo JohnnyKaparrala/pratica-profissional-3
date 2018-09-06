@@ -4,19 +4,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <div class="section">
             <div class="container white ">
-                <center><h4>Login</h4></center>
-                <div class="row section">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Email para Pacientes">account_box</i>
-                        <asp:TextBox placeholder="Cadastro" runat="server" id="txtEmail" type="" class="validate"></asp:TextBox>
-                    </div>           
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Senha do Cadastro">lock</i>
-                        <asp:TextBox placeholder="Senha" runat="server" id="txtSenha" type="password" class="validate"></asp:TextBox>
+                <div class="section">
+                    <center><h4>Login</h4></center>
+                </div>
+                <div class="section">
+                    <div class="row section">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Email para Pacientes">account_box</i>
+                            <asp:TextBox placeholder="Cadastro" runat="server" id="txtEmail" type="" class="validate"></asp:TextBox>
+                        </div>           
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Senha do Cadastro">lock</i>
+                            <asp:TextBox placeholder="Senha" runat="server" id="txtSenha" type="password" class="validate"></asp:TextBox>
+                        </div>
                     </div>
                 </div>
-                <br />  
-                <center><asp:Button ID="btnCadastrar" runat="server" Text="Entrar" class="waves-effect waves-light btn-large green darken-1" OnClick="btnCadastrar_Click" /></center>
+                <div class="section">
+                    <center><asp:Button ID="btnCadastrar" runat="server" Text="Entrar" class="waves-effect waves-light btn-large green darken-1" OnClick="btnCadastrar_Click" /></center>
+                </div>
             </div>
         </div>
 </asp:Content>

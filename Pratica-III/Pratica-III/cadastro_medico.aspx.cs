@@ -49,35 +49,36 @@ namespace Pratica_III
                 {
                     selEsp.Items.Insert(0, new ListItem(reader.GetValue(0).ToString()));
                 }
+
+                acessoBD.FecharConexao();
             }
             catch (Exception er)
             {
-                txtNome.Text = er.Message;
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
-
-            acessoBD.FecharConexao();
         }
 
         protected void btn_Submit_Click(object sender, EventArgs e)
         {
-            // associando a string de conexao com o BD com o configurado no WebConfig
-            conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-
-            // instanciar a classe conexaoBD
-            acessoBD = new conexaoBD();
-            acessoBD.Connection(conString);
-            acessoBD.AbrirConexao();
-
-            if (txtEmail.Text == "" || txtNiver.Text == "" || txtNome.Text == "" || txtTelefoneCel.Text == "" || txtTelefoneRes.Text == "")
+            try
             {
-                //TODO aparecer o alert falando pra preencher tudo
-            }
-            else
-            {
-                //TODO ver se dados estão formatados corretamente
-                byte[] vetorImagem;
-                try
+                // associando a string de conexao com o BD com o configurado no WebConfig
+                conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+
+                // instanciar a classe conexaoBD
+                acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+
+                if (txtEmail.Text == "" || txtNiver.Text == "" || txtNome.Text == "" || txtTelefoneCel.Text == "" || txtTelefoneRes.Text == "")
                 {
+                    throw new Exception("Preencha todos os campos!");
+                }
+                else
+                {
+                    //TODO ver se dados estão formatados corretamente
+                    byte[] vetorImagem;
+
                     SqlConnection myConnection;
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
@@ -138,12 +139,12 @@ namespace Pratica_III
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Médico registrado com sucesso!'});", true);
                     limparInputs();
+                    acessoBD.FecharConexao();
                 }
-                catch (Exception er)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Ocorreu um erro durante a operação!'});", true);
-                }
-                acessoBD.FecharConexao();
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
         }
     }
