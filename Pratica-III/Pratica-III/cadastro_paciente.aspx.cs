@@ -139,7 +139,7 @@ namespace Pratica_III
                         sqlCmd.Parameters.AddWithValue("@SENHA", conexaoBD.Hash(senha));
                     }
 
-                    int iResultado = sqlCmd.ExecuteNonQuery();
+                    sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Paciente registrado com sucesso!'});", true);
                     limparInputs();
                     acessoBD.FecharConexao();

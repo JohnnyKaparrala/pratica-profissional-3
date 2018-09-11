@@ -43,6 +43,8 @@ namespace Pratica_III
 
                 try
                 {
+                    int res = -1;
+
                     switch (Session["cargo"])
                     {
                         case 0:
@@ -51,7 +53,7 @@ namespace Pratica_III
                                 sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", txtSenha_nova.Text);
                                 sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", txtSenha_antiga.Text);
                                 sqlcmd.Parameters.AddWithValue("@NOME", Session["quem"]);
-                                sqlcmd.ExecuteNonQuery();
+                                res = sqlcmd.ExecuteNonQuery();
                             }
                             break;
 
@@ -59,9 +61,9 @@ namespace Pratica_III
                             {
                                 sqlcmd.CommandText = "UPDATE MEDICO SET SENHA = @SENHA_NOVA WHERE SENHA = @SENHA_ANTIGA AND EMAIL = @EMAIL";
                                 sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", conexaoBD.Hash(txtSenha_nova.Text));
-                                sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", txtSenha_antiga.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", conexaoBD.Hash(txtSenha_antiga.Text));
                                 sqlcmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
-                                sqlcmd.ExecuteNonQuery();
+                                res = sqlcmd.ExecuteNonQuery();
                             }
                             break;
 
@@ -69,9 +71,9 @@ namespace Pratica_III
                             {
                                 sqlcmd.CommandText = "UPDATE PACIENTE SET SENHA = @SENHA_NOVA WHERE SENHA = @SENHA_ANTIGA AND EMAIL = @EMAIL";
                                 sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", conexaoBD.Hash(txtSenha_nova.Text));
-                                sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", txtSenha_antiga.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", conexaoBD.Hash(txtSenha_antiga.Text));
                                 sqlcmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
-                                sqlcmd.ExecuteNonQuery();
+                                res = sqlcmd.ExecuteNonQuery();
                             }
                             break;
 
@@ -81,9 +83,14 @@ namespace Pratica_III
                             }
                             break;
                     }
+
+                    if (res != 1)
+                    {
+                        throw new Exception("Senha inválida.");
+                    }
                 } catch (Exception er)
                 {
-                    throw new Exception("Senha inválida.");
+                    throw new Exception(er.Message);
                 }
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Senha alterada com sucesso!'});", true);
             }
