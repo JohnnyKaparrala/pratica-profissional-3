@@ -73,7 +73,7 @@ namespace Pratica_III
                     reader.Close();
                     if (val == 1)
                     {
-                        throw new Exception("Paciente já cadastrado");
+                        throw new Exception("Paciente já cadastrado!");
                     }
 
                     //TODO ver se dados estão formatados corretamente

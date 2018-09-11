@@ -77,10 +77,30 @@ namespace Pratica_III
                 }
                 else
                 {
-                    //TODO ver se dados estão formatados corretamente
-                    byte[] vetorImagem;
+                    SqlConnection myConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString);
+                    myConnection.Open();
+                    conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                    acessoBD = new conexaoBD();
+                    acessoBD.Connection(conString);
+                    acessoBD.AbrirConexao();
+                    SqlCommand sqlcmd = new SqlCommand();
+                    myConnection = new SqlConnection(conString);
+                    myConnection.Open();
+                    sqlcmd.Connection = myConnection;
+                    sqlcmd.CommandText = "SELECT TOP 1 1 FROM MEDICO WHERE EMAIL = @EMAIL";
+                    sqlcmd.Parameters.AddWithValue("@EMAIL", txtEmail.Text);
+                    SqlDataReader reader = sqlcmd.ExecuteReader();
+                    int val = -1;
+                    reader.Read();
+                    val = Convert.ToInt32(reader.GetValue(0).ToString());
+                    reader.Close();
+                    if (val == 1)
+                    {
+                        throw new Exception("Médico já cadastrado!");
+                    }
 
-                    SqlConnection myConnection;
+                    byte[] vetorImagem;
+                    
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
 
@@ -101,14 +121,14 @@ namespace Pratica_III
                     int iByteRead = fs.Read(vetorImagem, 0, Convert.ToInt32(tamanhoArquivoImagem));
                     fs.Close();
 
-                    SqlCommand sqlcmd = new SqlCommand();
+                    sqlcmd = new SqlCommand();
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
                     sqlcmd.Connection = myConnection;
 
                     sqlcmd.CommandText = "SELECT ID FROM ESPECIALIDADE_MEDICO WHERE NOME = @NOME_ESPEC";
                     sqlcmd.Parameters.AddWithValue("@NOME_ESPEC", selEsp.Text);
-                    SqlDataReader reader = sqlcmd.ExecuteReader();
+                    reader = sqlcmd.ExecuteReader();
                     int esp = -1;
 
                     while (reader.Read())

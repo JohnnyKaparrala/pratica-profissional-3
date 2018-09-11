@@ -26,7 +26,7 @@ namespace Pratica_III
 
         protected void limparInputs()
         {
-
+            txtEsp.Text = "";
         }
 
         protected void btn_Submit_Click(object sender, EventArgs e)
@@ -47,10 +47,28 @@ namespace Pratica_III
                 }
                 else
                 {
-                    //TODO ver se dados estão formatados corretamente
-
-
-                    SqlConnection myConnection;
+                    SqlConnection myConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString);
+                    myConnection.Open();
+                    conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                    acessoBD = new conexaoBD();
+                    acessoBD.Connection(conString);
+                    acessoBD.AbrirConexao();
+                    SqlCommand sqlcmd = new SqlCommand();
+                    myConnection = new SqlConnection(conString);
+                    myConnection.Open();
+                    sqlcmd.Connection = myConnection;
+                    sqlcmd.CommandText = "SELECT TOP 1 1 FROM ESPECIALIDADE_MEDICO WHERE NOME = @NOME";
+                    sqlcmd.Parameters.AddWithValue("@NOME", txtEsp.Text);
+                    SqlDataReader reader = sqlcmd.ExecuteReader();
+                    int val = -1;
+                    reader.Read();
+                    val = Convert.ToInt32(reader.GetValue(0).ToString());
+                    reader.Close();
+                    if (val == 1)
+                    {
+                        throw new Exception("Especialidade já cadastrada!");
+                    }
+                    
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
 
@@ -71,6 +89,7 @@ namespace Pratica_III
             catch (Exception er)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
+                limparInputs();
             }
         }
     }
