@@ -34,7 +34,7 @@ namespace Pratica_III
 
                 case 2:
                     {
-                        add += "<li><a href=\"a.aspx\">Avaliação de consulta</a></li>";
+                        add += "<li><a href=\"avaliacao_consulta.aspx\">Avaliação de consulta</a></li>";
                     }
                     break;
                     

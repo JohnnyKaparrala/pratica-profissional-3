@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="agendamento_consulta.aspx" />
+    <Content Include="avaliacao_consulta.aspx" />
     <Content Include="contato.aspx" />
     <Content Include="login_geral.aspx" />
     <Content Include="cadastro_consulta.aspx" />
@@ -237,6 +238,13 @@
     </Compile>
     <Compile Include="App_Start\conexaoBD.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="avaliacao_consulta.aspx.cs">
+      <DependentUpon>avaliacao_consulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="avaliacao_consulta.aspx.designer.cs">
+      <DependentUpon>avaliacao_consulta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="contato.aspx.cs">
       <DependentUpon>contato.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
