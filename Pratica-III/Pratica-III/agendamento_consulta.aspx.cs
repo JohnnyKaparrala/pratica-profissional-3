@@ -153,9 +153,9 @@ namespace Pratica_III
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta agendada com sucesso!'});", true);
+                    limparInputs();
+                    acessoBD.FecharConexao();
                 }
-                limparInputs();
-                acessoBD.FecharConexao();
             }
             catch (Exception er)
             {

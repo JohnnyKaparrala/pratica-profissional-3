@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,28 +18,37 @@ namespace Pratica_III
              1: medico
              2: paciente
             */
+            string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath);
             switch (Session["cargo"])
             {
-                case 0:
+                case 0://adm
                     {
                         add += "<li><a href=\"agendamento_consulta.aspx\">Agendamentos de consulta</a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"cadastros-drop\">Cadastros<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"relatorios-drop\">Relatórios<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                     }break;
 
-                case 1:
+                case 1://med
                     {
                         add += "<li><a href=\"cadastro_consulta.aspx\">Cadastro consulta</a></li>";
+                        if (pageName != "index" && pageName != "logout" && pageName != "relatorio_geral" && pageName != "relatorio_medicao" && pageName != "relatorio_paciente")
+                        {
+                            body.InnerHtml = "<h4>Você nao tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
+                        }
                     }
                     break;
 
-                case 2:
+                case 2://pac
                     {
                         add += "<li><a href=\"avaliacao_consulta.aspx\">Avaliação de consulta</a></li>";
+                        add += "<li><a href=\"contato.aspx\">Contato</a></li>";
+                        if (pageName != "avaliacao_consulta" && pageName != "index" && pageName != "logout")
+                        {
+                            body.InnerHtml = "<h4>Você nao tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
+                        }
                     }
                     break;
                     
-                    break;
                 default: {
                         
                     } break;
@@ -47,6 +57,10 @@ namespace Pratica_III
             {
                 add += "<li><a href=\"contato.aspx\">Contato</a></li>";
                 add += "<li><a href=\"login_geral.aspx\">Login</a></li>";
+                if (pageName != "contato" && pageName != "login_geral" && pageName != "index")
+                {
+                    body.InnerHtml = "<h4>Você não tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
+                }
             }
             else
             {

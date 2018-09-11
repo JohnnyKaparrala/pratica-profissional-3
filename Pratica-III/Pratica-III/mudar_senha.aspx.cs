@@ -58,7 +58,7 @@ namespace Pratica_III
                         case 1:
                             {
                                 sqlcmd.CommandText = "UPDATE MEDICO SET SENHA = @SENHA_NOVA WHERE SENHA = @SENHA_ANTIGA AND EMAIL = @EMAIL";
-                                sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", txtSenha_nova.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", conexaoBD.Hash(txtSenha_nova.Text));
                                 sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", txtSenha_antiga.Text);
                                 sqlcmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                                 sqlcmd.ExecuteNonQuery();
@@ -68,7 +68,7 @@ namespace Pratica_III
                         case 2:
                             {
                                 sqlcmd.CommandText = "UPDATE PACIENTE SET SENHA = @SENHA_NOVA WHERE SENHA = @SENHA_ANTIGA AND EMAIL = @EMAIL";
-                                sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", txtSenha_nova.Text);
+                                sqlcmd.Parameters.AddWithValue("@SENHA_NOVA", conexaoBD.Hash(txtSenha_nova.Text));
                                 sqlcmd.Parameters.AddWithValue("@SENHA_ANTIGA", txtSenha_antiga.Text);
                                 sqlcmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                                 sqlcmd.ExecuteNonQuery();

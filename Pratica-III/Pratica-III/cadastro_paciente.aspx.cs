@@ -111,7 +111,6 @@ namespace Pratica_III
                         {
                             cliente.Send(mail);
                             //foi, deu certo
-                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Email Enviado com Sucesso!});", true);
                         }
                         catch (InvalidOperationException ex)
                         {
@@ -143,8 +142,8 @@ namespace Pratica_III
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Paciente registrado com sucesso!'});", true);
                     limparInputs();
+                    acessoBD.FecharConexao();
                 }
-                acessoBD.FecharConexao();
             }
             catch (Exception er)
             {

@@ -14,7 +14,7 @@
     <script src="jquery.js"></script>
     <script src="materialize/materialize.min.js"></script>
 </head>
-<body>
+<body runat="server" id="body">
     <header>
         <ul id="cadastros-drop" class="dropdown-content">
           <li><a href="cadastro_especialidade.aspx">Especialidade</a></li>
