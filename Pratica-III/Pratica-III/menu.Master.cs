@@ -33,7 +33,7 @@ namespace Pratica_III
                         add += "<li><a href=\"cadastro_consulta.aspx\">Cadastro consulta</a></li>";
                         if (pageName != "index" && pageName != "logout" && pageName != "relatorio_geral" && pageName != "relatorio_medicao" && pageName != "relatorio_paciente")
                         {
-                            body.InnerHtml = "<h4>Você nao tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
+                            body.InnerHtml = "<h4>Você não tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
                         }
                     }
                     break;
@@ -44,7 +44,7 @@ namespace Pratica_III
                         add += "<li><a href=\"contato.aspx\">Contato</a></li>";
                         if (pageName != "avaliacao_consulta" && pageName != "index" && pageName != "logout")
                         {
-                            body.InnerHtml = "<h4>Você nao tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
+                            body.InnerHtml = "<h4>Você não tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
                         }
                     }
                     break;
