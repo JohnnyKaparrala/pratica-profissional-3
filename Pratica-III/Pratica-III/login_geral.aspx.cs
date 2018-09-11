@@ -46,10 +46,7 @@ namespace Pratica_III
                 myConnection = new SqlConnection(conString);
                 myConnection.Open();
                 sqlcmd.Connection = myConnection;
-
-                String sql;
-                int res;
-
+                
                 try
                 {
                     switch (cargo.SelectedIndex)
