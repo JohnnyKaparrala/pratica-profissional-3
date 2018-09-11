@@ -14,6 +14,7 @@ using System.IO;
 using System.Drawing;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Pratica_III
 {
@@ -22,7 +23,7 @@ namespace Pratica_III
         conexaoBD acessoBD;
         String conString;
 
-        protected void limparInputs ()
+        protected void limparInputs()
         {
 
         }
@@ -120,6 +121,52 @@ namespace Pratica_III
 
                     }
                     reader.Close();
+
+                    //gera senha aleatória
+                    string senha;
+                    senha = System.Web.Security.Membership.GeneratePassword(10, 0);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:console.log(\"" + senha + "\");", true);
+
+                    //envia email com senha
+                    {
+                        String em = "bellydogclinica@gmail.com";
+                        MailMessage mail = new MailMessage();
+                        mail.To.Add(txtEmail.Text);
+                        mail.From = new MailAddress(em, "Clínica Belly", System.Text.Encoding.UTF8);
+                        mail.Subject = "Seu Cadastro na Clínica Belly!";
+                        mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                        mail.Body = "Seu usuário é: " + txtEmail.Text + "\nSua senha é " + senha;
+                        mail.BodyEncoding = System.Text.Encoding.UTF8;
+                        mail.IsBodyHtml = true;
+                        mail.Priority = MailPriority.High;
+
+                        SmtpClient cliente = new SmtpClient();
+                        cliente.UseDefaultCredentials = false;
+                        cliente.Credentials = new System.Net.NetworkCredential(em, "bellypr3");
+                        cliente.Port = 587;
+                        cliente.Host = "smtp.gmail.com";
+                        cliente.EnableSsl = true;
+
+
+                        try
+                        {
+                            cliente.Send(mail);
+                            //foi, deu certo
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Email Enviado com Sucesso!});", true);
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            throw new Exception("Email incorreto! Verifique se tudo foi preenchido corretamente.");
+                        }
+                        catch (SmtpFailedRecipientsException ex)
+                        {
+                            throw new Exception("Email incorreto, não foi possível enviar a mensagem.");
+                        }
+                        catch (SmtpException ex)
+                        {
+                            throw new Exception("Não foi possível enviar o email! Verifique sua conexão.");
+                        }
+                    }
 
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = myConnection;

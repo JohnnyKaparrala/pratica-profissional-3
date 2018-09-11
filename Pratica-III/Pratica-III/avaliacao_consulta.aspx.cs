@@ -38,7 +38,7 @@ namespace Pratica_III
 
                 while (reader.Read())
                 {
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + val2 + "</td><td>" + reader.GetValue(3).ToString() + "</td><td>" + reader.GetValue(4).ToString() + "</td><td>" + val + "</td></tr>";
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + "" + "</td><td>" + reader.GetValue(3).ToString() + "</td><td>" + reader.GetValue(4).ToString() + "</td><td>" + "" + "</td></tr>";
                 }
             }
             catch (Exception er)
