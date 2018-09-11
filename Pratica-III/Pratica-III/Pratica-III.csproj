@@ -179,6 +179,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="materialize\materialize.min.css" />
     <Content Include="materialize\materialize.min.js" />
+    <Content Include="mudar_senha.aspx" />
     <Content Include="relatorio_geral.aspx" />
     <Content Include="relatorio_medicao.aspx" />
     <Content Include="relatorio_paciente.aspx" />
@@ -315,6 +316,13 @@
     </Compile>
     <Compile Include="menu.Master.designer.cs">
       <DependentUpon>menu.Master</DependentUpon>
+    </Compile>
+    <Compile Include="mudar_senha.aspx.cs">
+      <DependentUpon>mudar_senha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mudar_senha.aspx.designer.cs">
+      <DependentUpon>mudar_senha.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="relatorio_geral.aspx.cs">

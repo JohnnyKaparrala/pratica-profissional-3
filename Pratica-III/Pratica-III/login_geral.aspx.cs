@@ -105,6 +105,7 @@ namespace Pratica_III
                     throw new Exception("Cadastro inválido!");
                 }
                 Session["cargo"] = cargo.SelectedIndex - 1;
+                Session["quem"] = txtEmail.Text;
                 /*
                  0: secretaria
                  1: medico
