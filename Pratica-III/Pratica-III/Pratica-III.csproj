@@ -140,14 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="agendamento_consulta.aspx" />
-    <Content Include="avaliacao_consulta.aspx" />
+    <Content Include="consultas.aspx" />
     <Content Include="contato.aspx" />
     <Content Include="login_geral.aspx" />
     <Content Include="cadastro_consulta.aspx" />
     <Content Include="cadastro_especialidade.aspx" />
     <Content Include="cadastro_medico.aspx" />
     <Content Include="cadastro_paciente.aspx" />
-    <Content Include="Contact.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-style.css" />
@@ -216,12 +215,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\conexaoBD.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="avaliacao_consulta.aspx.cs">
-      <DependentUpon>avaliacao_consulta.aspx</DependentUpon>
+    <Compile Include="consultas.aspx.cs">
+      <DependentUpon>consultas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="avaliacao_consulta.aspx.designer.cs">
-      <DependentUpon>avaliacao_consulta.aspx</DependentUpon>
+    <Compile Include="consultas.aspx.designer.cs">
+      <DependentUpon>consultas.aspx</DependentUpon>
     </Compile>
     <Compile Include="contato.aspx.cs">
       <DependentUpon>contato.aspx</DependentUpon>
@@ -264,13 +263,6 @@
     </Compile>
     <Compile Include="cadastro_paciente.aspx.designer.cs">
       <DependentUpon>cadastro_paciente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

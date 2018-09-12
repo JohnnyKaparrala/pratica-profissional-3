@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/menu.Master" AutoEventWireup="true" CodeBehind="avaliacao_consulta.aspx.cs" Inherits="Pratica_III.avaliacao_consulta" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/menu.Master" AutoEventWireup="true" CodeBehind="consultas.aspx.cs" Inherits="Pratica_III.avaliacao_consulta" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -18,6 +18,7 @@
                                     <th>Horário início</th>
                                     <th>Médico</th>
                                     <th>Concluída</th>
+                                    <th>Avaliar</th>
                                 </tr>
                             </thead>
                             <tbody runat="server" id="tbBody">

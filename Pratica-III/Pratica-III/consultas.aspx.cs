@@ -33,12 +33,20 @@ namespace Pratica_III
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
 
-                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, C.DURACAO, M.NOME FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE";
+                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, M.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_PACIENTE = (SELECT ID FROM PACIENTE WHERE EMAIL = @EMAIL)";
+                sqlCmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                 SqlDataReader reader = sqlCmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + "" + "</td><td>" + reader.GetValue(3).ToString() + "</td><td>" + reader.GetValue(4).ToString() + "</td><td>" + "" + "</td></tr>";
+                    string val = "✕";
+                    bool conc = false;
+                    if (reader.GetValue(3).ToString() == "True")
+                    {
+                        val = "✓";
+                        conc = true;
+                    }
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td>" + val + "</td><td>" + (conc?"":"<asp:Button runat=\"server\" Text=\"AVALIAR\" class=\"waves-effect waves-light btn-small green darken-1\" OnClick=\"btn_consulta_Click\" />") + "</td><td>";
                 }
             }
             catch (Exception er)

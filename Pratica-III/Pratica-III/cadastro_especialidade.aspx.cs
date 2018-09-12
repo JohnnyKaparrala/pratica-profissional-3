@@ -58,17 +58,14 @@ namespace Pratica_III
                     myConnection.Open();
                     sqlcmd.Connection = myConnection;
                     sqlcmd.CommandText = "SELECT TOP 1 1 FROM ESPECIALIDADE_MEDICO WHERE NOME = @NOME";
-                    sqlcmd.Parameters.AddWithValue("@NOME", txtEsp.Text);
+                    sqlcmd.Parameters.AddWithValue("@NOME", txtEsp.Text.ToUpper().ToString());
                     SqlDataReader reader = sqlcmd.ExecuteReader();
                     int val = -1;
-                    reader.Read();
-                    val = Convert.ToInt32(reader.GetValue(0).ToString());
-                    reader.Close();
-                    if (val == 1)
+                    if (reader.Read())
                     {
                         throw new Exception("Especialidade já cadastrada!");
                     }
-                    
+                    reader.Close();
                     myConnection = new SqlConnection(conString);
                     myConnection.Open();
 
@@ -78,12 +75,13 @@ namespace Pratica_III
                     {
                         sqlCmd.CommandText = "INSERT INTO ESPECIALIDADE_MEDICO(NOME) VALUES (@NOME)";
 
-                        sqlCmd.Parameters.AddWithValue("@NOME", txtEsp.Text);
+                        sqlCmd.Parameters.AddWithValue("@NOME", txtEsp.Text.ToUpper().ToString());
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Especialidade registrada com sucesso!'});", true);
                     acessoBD.FecharConexao();
+                    limparInputs();
                 }
             }
             catch (Exception er)
