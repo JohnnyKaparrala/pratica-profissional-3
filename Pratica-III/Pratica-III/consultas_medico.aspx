@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/menu.Master" AutoEventWireup="true" CodeBehind="consultas.aspx.cs" Inherits="Pratica_III.avaliacao_consulta" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/menu.Master" AutoEventWireup="true" CodeBehind="consultas_medico.aspx.cs" Inherits="Pratica_III.consultas_medico" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="section">
         <div class="row white container">
             <div class="section">
-                <center><h4>Avaliar consultas</h4></center>
+                <center><h4>Concluir consultas</h4></center>
             </div>
             <div class="section">
                 <form class="col s12">
@@ -15,9 +15,9 @@
                                 <tr>
                                     <th>ID consulta</th>
                                     <th>Horário início</th>
-                                    <th>Médico</th>
+                                    <th>Paciente</th>
                                     <th>Concluída</th>
-                                    <th>Avaliar</th>
+                                    <th>Cadastro</th>
                                 </tr>
                             </thead>
                             <tbody runat="server" id="tbBody">

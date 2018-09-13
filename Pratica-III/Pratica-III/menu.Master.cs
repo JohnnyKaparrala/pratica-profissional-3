@@ -23,6 +23,7 @@ namespace Pratica_III
             {
                 case 0://adm
                     {
+                        add += "<li><a href=\"consultas_adm.aspx\">Consultas</a></li>";
                         add += "<li><a href=\"agendamento_consulta.aspx\">Agendamentos de consulta</a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"cadastros-drop\">Cadastros<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"relatorios-drop\">Relatórios<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
@@ -30,8 +31,8 @@ namespace Pratica_III
 
                 case 1://med
                     {
-                        add += "<li><a href=\"consulta_med.aspx\">Consultas</a></li>";
-                        if (pageName != "index" && pageName != "logout" && pageName != "relatorio_geral" && pageName != "relatorio_medicao" && pageName != "relatorio_paciente" && pageName != "mudar_senha")
+                        add += "<li><a href=\"consultas_medico.aspx\">Consultas</a></li>";
+                        if (pageName != "index" && pageName != "logout" && pageName != "relatorio_geral" && pageName != "relatorio_medicao" && pageName != "relatorio_paciente" && pageName != "mudar_senha" && pageName != "consultas_medico")
                         {
                             body.InnerHtml = "<h4>Você não tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
                         }

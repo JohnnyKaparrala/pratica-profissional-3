@@ -141,6 +141,8 @@
   <ItemGroup>
     <Content Include="agendamento_consulta.aspx" />
     <Content Include="consultas.aspx" />
+    <Content Include="consultas_adm.aspx" />
+    <Content Include="consultas_medico.aspx" />
     <Content Include="contato.aspx" />
     <Content Include="login_geral.aspx" />
     <Content Include="cadastro_consulta.aspx" />
@@ -221,6 +223,20 @@
     </Compile>
     <Compile Include="consultas.aspx.designer.cs">
       <DependentUpon>consultas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="consultas_adm.aspx.cs">
+      <DependentUpon>consultas_adm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="consultas_adm.aspx.designer.cs">
+      <DependentUpon>consultas_adm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="consultas_medico.aspx.cs">
+      <DependentUpon>consultas_medico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="consultas_medico.aspx.designer.cs">
+      <DependentUpon>consultas_medico.aspx</DependentUpon>
     </Compile>
     <Compile Include="contato.aspx.cs">
       <DependentUpon>contato.aspx</DependentUpon>

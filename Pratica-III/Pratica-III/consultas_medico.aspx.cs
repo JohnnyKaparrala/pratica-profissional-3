@@ -13,7 +13,7 @@ using Pratica_III.App_Start;
 
 namespace Pratica_III
 {
-    public partial class avaliacao_consulta : System.Web.UI.Page
+    public partial class consultas_medico : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,7 +33,7 @@ namespace Pratica_III
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
 
-                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, M.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_PACIENTE = (SELECT ID FROM PACIENTE WHERE EMAIL = @EMAIL)";
+                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, P.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_MEDICO = (SELECT ID FROM MEDICO WHERE EMAIL = @EMAIL)";
                 sqlCmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                 SqlDataReader reader = sqlCmd.ExecuteReader();
 
@@ -46,7 +46,7 @@ namespace Pratica_III
                         val = "✓";
                         conc = true;
                     }
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc? "<a class=\"waves-effect waves-light btn-small green darken-1\">AVALIAR</a>" : "Avaliação não disponível") + "</td><td>";
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc ? "Conclusão não disponível" : "<a class=\"waves-effect waves-light btn-small green darken-1\">CONCLUIR</a>") + "</td><td>";
                 }
             }
             catch (Exception er)
