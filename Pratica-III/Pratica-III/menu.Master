@@ -52,4 +52,6 @@
         </footer>
     </body>
     <script src="script.js"></script>
+    <asp:ContentPlaceHolder ID="scripts" runat="server">
+    </asp:ContentPlaceHolder>
 </html>

@@ -55,3 +55,28 @@
         </div>
     </div>
 </asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="server">
+    <script>
+        $(document).ready(function () {
+            $("#agendamento-menu").addClass('active');
+            $('.datepicker').datepicker({
+                i18n: {
+                    months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    weekdays: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+                    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                    weekdaysAbbrev: ["D", "S", "T", "Q", "Q", "S", "S"],
+                    cancel: 'Cancelar',
+                    clear: 'Limpar',
+                    done: 'Ok'
+                },
+                yearRange: 100,
+                format: 'yyyy-dd-mm',
+                onOpen: function () {
+                    var instance = M.Datepicker.getInstance($('.datepicker'));
+                    instance.options.maxDate = new Date();
+                }
+            });
+        });
+    </script>
+</asp:Content>

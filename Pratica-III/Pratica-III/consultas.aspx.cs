@@ -46,14 +46,13 @@ namespace Pratica_III
                         val = "✓";
                         conc = true;
                     }
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td>" + val + "</td><td>" + (conc?"":"<asp:Button runat=\"server\" Text=\"AVALIAR\" class=\"waves-effect waves-light btn-small green darken-1\" OnClick=\"btn_consulta_Click\" />") + "</td><td>";
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc?"<asp:Button runat=\"server\" text=\"AVALIAR\" class=\"waves-effect waves-light btn-small green darken-1\" OnClick=\"btn_consulta_Click\" />":"a") + "</td><td>";
                 }
             }
             catch (Exception er)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: Ocorreu um erro durante a operação!'});", true);
             }
-            
         }
     }
 }
