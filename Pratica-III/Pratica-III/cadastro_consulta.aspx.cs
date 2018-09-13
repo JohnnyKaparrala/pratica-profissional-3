@@ -18,71 +18,14 @@ namespace Pratica_III
         string id;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            id = Request["id"];
+            lblId.InnerText = id;
+            lblPac.InnerText = Request["pac"];
         }
 
         protected void limparInputs ()
         {
-
-        }
-
-        protected void btn_consulta_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                id = "";
-                string conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-                // instanciar a classe conexaoBD
-                conexaoBD acessoBD = new conexaoBD();
-                acessoBD.Connection(conString);
-                acessoBD.AbrirConexao();
-
-                if (txtID.Text == "")
-                {
-                    throw new Exception("Preencha todos os campos!");
-                }
-                else
-                {
-                    //TODO ver se dados estão formatados corretamente
-                
-                    SqlConnection myConnection;
-                    myConnection = new SqlConnection(conString);
-                    myConnection.Open();
-
-                    conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-                    acessoBD = new conexaoBD();
-                    acessoBD.Connection(conString);
-                    acessoBD.AbrirConexao();
-
-                    SqlCommand sqlcmd = new SqlCommand();
-                    myConnection = new SqlConnection(conString);
-                    myConnection.Open();
-                    sqlcmd.Connection = myConnection;
-
-                    sqlcmd.CommandText = "SELECT TOP 1 1 FROM CONSULTA WHERE ID = @ID";
-                    sqlcmd.Parameters.AddWithValue("@ID", txtID.Text);
-                    SqlDataReader reader = sqlcmd.ExecuteReader();
-                    int val = -1;
-                    id = txtID.Text;
-                    while (reader.Read())
-                    {
-                        val = Convert.ToInt32(reader.GetValue(0).ToString());
-                    }
-                    reader.Close();
-                    
-                    if (val != 1)
-                    {
-                        //TODO
-                    }
-                
-                }
-            }
-            catch (Exception er)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
-            }
-            btnSubmit.Attributes["class"] = btnSubmit.Attributes["class"].Replace("disabled", "").Trim();
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta encontrada!'});", true);
+            txtAnotacao.Text = "";
         }
 
         protected void btn_Submit_Click(object sender, EventArgs e)
@@ -90,9 +33,9 @@ namespace Pratica_III
             try
             {
                 // associando a string de conexao com o BD com o configurado no WebConfig
-                if (id == "")
+                if (txtAnotacao.Text == "")
                 {
-                    //TODO aparecer o alert falando pra preencher tudo
+                    throw new Exception("Preencha todos os campos!");
                 }
                 else
                 {
@@ -119,11 +62,10 @@ namespace Pratica_III
                     {
                         sqlCmd.CommandText = "UPDATE CONSULTA SET ANOTACOES = @ANOTACOES, CONCLUIDA = 1 WHERE ID = @ID";
                         sqlCmd.Parameters.AddWithValue("@ANOTACOES", txtAnotacao.Text);
-                        sqlCmd.Parameters.AddWithValue("@ID", txtID.Text);
+                        sqlCmd.Parameters.AddWithValue("@ID", id);
                     }
 
                     int iResultado = sqlCmd.ExecuteNonQuery();
-                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "myScript", "AnotherFunction();", true);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Consulta registrada com sucesso!'});", true);
                     limparInputs();
                     acessoBD.FecharConexao();

@@ -20,8 +20,6 @@
               <li><a href="cadastro_especialidade.aspx">Especialidade</a></li>
               <li><a href="cadastro_paciente.aspx">Paciente</a></li>
               <li><a href="cadastro_medico.aspx">Médico</a></li>
-              <li class="divider"></li>
-              <li><a href="cadastro_consulta.aspx">Consulta</a></li>
             </ul>
             <ul id="relatorios-drop" class="dropdown-content">
               <li><a href="relatorio_geral.aspx">Números de consulta</a></li>

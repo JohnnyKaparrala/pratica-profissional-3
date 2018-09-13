@@ -13,22 +13,22 @@ namespace Pratica_III {
     public partial class cadastro_consulta {
         
         /// <summary>
-        /// Controle txtID.
+        /// Controle lblId.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtID;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblId;
         
         /// <summary>
-        /// Controle Button1.
+        /// Controle lblPac.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPac;
         
         /// <summary>
         /// Controle txtAnotacao.

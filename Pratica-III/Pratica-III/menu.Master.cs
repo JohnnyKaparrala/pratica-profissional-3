@@ -32,7 +32,7 @@ namespace Pratica_III
                 case 1://med
                     {
                         add += "<li><a href=\"consultas_medico.aspx\">Consultas</a></li>";
-                        if (pageName != "index" && pageName != "logout" && pageName != "relatorio_geral" && pageName != "relatorio_medicao" && pageName != "relatorio_paciente" && pageName != "mudar_senha" && pageName != "consultas_medico")
+                        if (pageName != "index" && pageName != "logout" && pageName != "relatorio_geral" && pageName != "relatorio_medicao" && pageName != "relatorio_paciente" && pageName != "mudar_senha" && pageName != "consultas_medico" && pageName != "cadastro_consulta")
                         {
                             body.InnerHtml = "<h4>Você não tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
                         }
