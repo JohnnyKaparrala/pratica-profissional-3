@@ -39,14 +39,24 @@ namespace Pratica_III
 
                 while (reader.Read())
                 {
-                    string val = "✕";
-                    bool conc = false;
-                    if (Convert.ToInt16(reader.GetValue(3).ToString()) == 1)
+                    string val_conc = "<span class=\"red-text\">EXPIRADA</span>";
+
+                    switch (Convert.ToInt16(reader.GetValue(3).ToString()))
                     {
-                        val = "✓";
-                        conc = true;
+                        case 1:
+                            {
+                                val_conc = "<span class=\"grey-text\">CONCLUÍDA</span>";
+                            }
+                            break;
+
+                        case 0:
+                            {
+                                val_conc = $"<a href=\"cadastro_consulta.aspx?pac={reader.GetValue(2).ToString()}&id={reader.GetValue(0).ToString()}\" class=\"waves-effect waves-light btn-small green darken-1\">CONCLUIR</a>";
+                            }
+                            break;
                     }
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc ? "Conclusão não disponível" : $"<a href=\"cadastro_consulta.aspx?pac={reader.GetValue(2).ToString()}&id={reader.GetValue(0).ToString()}\" class=\"waves-effect waves-light btn-small green darken-1\">CONCLUIR</a>") + "</td><td>";
+                    
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + ((DateTime)reader.GetValue(1)).ToString("dd'/'MM'/'yyyy") + "</td><td>" + ((DateTime)reader.GetValue(1)).ToString("hh: mm") + " - " + ((DateTime)reader.GetValue(1)).ToString("hh: mm") + "</td><td>" + reader.GetValue(2).ToString() + "</td><td>" + val_conc + "</td><td>";
                 }
             }
             catch (Exception er)

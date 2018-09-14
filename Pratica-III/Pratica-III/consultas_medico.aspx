@@ -14,10 +14,10 @@
                             <thead>
                                 <tr>
                                     <th>ID consulta</th>
-                                    <th>Horário início</th>
+                                    <th>Data</th>
+                                    <th>Horário</th>
                                     <th>Paciente</th>
-                                    <th>Concluída</th>
-                                    <th>Cadastro</th>
+                                    <th>Status de conclusão</th>
                                 </tr>
                             </thead>
                             <tbody runat="server" id="tbBody">
