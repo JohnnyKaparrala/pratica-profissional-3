@@ -27,18 +27,6 @@
                     <div class="input-field col s6">
                         <asp:DropDownList runat="server" id="txtHor">
                             <asp:ListItem disabled>Escolha o horário</asp:ListItem>
-                            <asp:ListItem>09:00</asp:ListItem>
-                            <asp:ListItem>09:30</asp:ListItem>
-                            <asp:ListItem>10:00</asp:ListItem>
-                            <asp:ListItem>10:30</asp:ListItem>
-                            <asp:ListItem>11:00</asp:ListItem>
-                            <asp:ListItem>11:30</asp:ListItem>
-                            <asp:ListItem>14:00</asp:ListItem>
-                            <asp:ListItem>14:30</asp:ListItem>
-                            <asp:ListItem>15:00</asp:ListItem>
-                            <asp:ListItem>15:30</asp:ListItem>
-                            <asp:ListItem>16:00</asp:ListItem>
-                            <asp:ListItem>16:30</asp:ListItem>
                         </asp:DropDownList>
                         <label>Horário</label>
                     </div>

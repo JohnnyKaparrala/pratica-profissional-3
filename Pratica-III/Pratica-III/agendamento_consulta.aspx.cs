@@ -17,7 +17,35 @@ namespace Pratica_III
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
+            <asp:ListItem>09:00</asp:ListItem>
+            <asp:ListItem>09:30</asp:ListItem>
+            <asp:ListItem>10:00</asp:ListItem>
+            <asp:ListItem>10:30</asp:ListItem>
+            <asp:ListItem>11:00</asp:ListItem>
+            <asp:ListItem>11:30</asp:ListItem>
+            <asp:ListItem>14:00</asp:ListItem>
+            <asp:ListItem>14:30</asp:ListItem>
+            <asp:ListItem>15:00</asp:ListItem>
+            <asp:ListItem>15:30</asp:ListItem>
+            <asp:ListItem>16:00</asp:ListItem>
+            <asp:ListItem>16:30</asp:ListItem>
+            */
 
+            DateTime data = DateTime.Now;
+            for (int m = 0, h = 9; h < 17; m += 30)
+            {
+                if (m == 60)
+                {
+                    m = 0;
+                    h++;
+                }
+                if (h >= data.Hour && h != 13 && h != 12)
+                {
+                    if (h == data.Hour && m > data.Minute)
+                        txtHor.Items.Add(h.ToString().PadLeft(2, '0') + ":" + m.ToString().PadLeft(2, '0'));
+                }
+            }
         }
 
         protected void limparInputs()
