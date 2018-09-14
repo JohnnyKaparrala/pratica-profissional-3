@@ -33,7 +33,7 @@ namespace Pratica_III
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
 
-                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, P.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_MEDICO = (SELECT ID FROM MEDICO WHERE EMAIL = @EMAIL)";
+                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, P.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_MEDICO = (SELECT ID FROM MEDICO WHERE EMAIL = @EMAIL) ORDER BY ID DESC";
                 sqlCmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                 SqlDataReader reader = sqlCmd.ExecuteReader();
 
@@ -41,7 +41,7 @@ namespace Pratica_III
                 {
                     string val = "✕";
                     bool conc = false;
-                    if (reader.GetValue(3).ToString() == "True")
+                    if (Convert.ToInt16(reader.GetValue(3).ToString()) == 1)
                     {
                         val = "✓";
                         conc = true;

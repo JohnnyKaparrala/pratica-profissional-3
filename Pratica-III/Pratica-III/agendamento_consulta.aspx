@@ -78,7 +78,9 @@
                 format: 'yyyy-dd-mm',
                 onOpen: function () {
                     var instance = M.Datepicker.getInstance($('.datepicker'));
-                    instance.options.minDate = new Date();
+                    var data = new Date();
+                    data.setDate(data.getDate() - 1);
+                    instance.options.minDate = data;
                 }
             });
         });

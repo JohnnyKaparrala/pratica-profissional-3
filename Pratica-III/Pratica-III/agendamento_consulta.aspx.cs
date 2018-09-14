@@ -111,7 +111,7 @@ namespace Pratica_III
 
                     string horario = txtData.Text + " " + txtHor.Text;
 
-                    sqlcmd.CommandText = "SELECT HORARIO FROM CONSULTA WHERE ID_MEDICO = 1 AND HORARIO BETWEEN (@DIA) AND (@DIA_SEGUINTE)";
+                    sqlcmd.CommandText = "SELECT HORARIO FROM CONSULTA WHERE ID_MEDICO = @ID_MED AND HORARIO BETWEEN (@DIA) AND (@DIA_SEGUINTE)";
                     sqlcmd.Parameters.AddWithValue("@DIA", txtData.Text + " 00:00:00.000");
                     sqlcmd.Parameters.AddWithValue("@DIA_SEGUINTE", txtData.Text + " 23:59:59.999");
                     sqlcmd.Parameters.AddWithValue("@HORARIO", horario + ".000");
@@ -123,11 +123,11 @@ namespace Pratica_III
                         string horario_autal = reader.GetValue(0).ToString().Substring((reader.GetValue(0).ToString()).Length - 8);
                         if (dur == 1)
                         {
-                            if ((prox_horario(txtHor.Text + ":00") == horario_autal))
+                            if ((prox_horario(prox_horario(txtHor.Text + ":00")) == horario_autal))
                                 throw new Exception("Médico já está ocupado neste horário.");
                         }
                         else
-                        if (txtHor.Text + ":00" == horario_autal)
+                        if (prox_horario(txtHor.Text + ":00") == horario_autal)
                         {
                             throw new Exception("Médico já está ocupado neste horário.");
                         }
