@@ -1,3 +1,11 @@
+select * from CONSULTA
+
+while (1 = 1)
+begin
+	waitfor time '23:59:59.999'
+	update consulta set concluida = -1 where concluida = 0
+end
+--codigo pra jojar
 insert into adm values('admin','admin')
 SELECT TOP 1 1 FROM adm where nome = 'admin' and senha = 'admin'
 

@@ -26,6 +26,10 @@ namespace Pratica_III
         protected void limparInputs ()
         {
             txtAnotacao.Text = "";
+            lblId.InnerText = "";
+            lblPac.InnerText = "";
+            Session["pac"] = null;
+            Session["id"] = null;
         }
 
         protected void btn_Submit_Click(object sender, EventArgs e)
@@ -74,6 +78,7 @@ namespace Pratica_III
             catch (Exception er)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
+                limparInputs();
             }
         }
     }

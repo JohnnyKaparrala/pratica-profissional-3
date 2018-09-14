@@ -40,10 +40,9 @@ namespace Pratica_III
                     m = 0;
                     h++;
                 }
-                if (h >= data.Hour && h != 13 && h != 12)
+                if (h > data.Hour && h != 13 && h != 12)
                 {
-                    if (h == data.Hour && m > data.Minute)
-                        txtHor.Items.Add(h.ToString().PadLeft(2, '0') + ":" + m.ToString().PadLeft(2, '0'));
+                    txtHor.Items.Add(h.ToString().PadLeft(2, '0') + ":" + m.ToString().PadLeft(2, '0'));
                 }
             }
         }
