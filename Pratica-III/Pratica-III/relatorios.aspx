@@ -7,24 +7,69 @@
         <div class="container white ">
             <center><h4>Relatórios</h4></center>
             <div class="row section">
-                <div class="input-field col s9">
+                <div class="input-field col s6">
                     <asp:DropDownList runat="server" id="escolhaGraf">
-                        <asp:ListItem Disabled Selected="True">Escolher tipo de relatório</asp:ListItem>
-                        <asp:ListItem>Consulta por Médico</asp:ListItem>
-                        <asp:ListItem>Atendimento por Especialidade</asp:ListItem>
-                        <asp:ListItem>Consulta por paciente</asp:ListItem>
-                        <asp:ListItem>Consultas Canceladas</asp:ListItem>
+                        <asp:ListItem Value="0" Disabled Selected="True">Escolher tipo de relatório</asp:ListItem>
+                        <asp:ListItem Value="1">Consulta por Médico</asp:ListItem>
+                        <asp:ListItem Value="2">Atendimento por Especialidade</asp:ListItem>
+                        <asp:ListItem Value="3">Consulta por paciente</asp:ListItem>
+                        <asp:ListItem Value="4">Consultas Canceladas</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="input-field col s3">
-                    <asp:Button runat="server" id="btnGraf" Text="Gerar Relatório" class="waves-effect waves-light btn-large green darken-1"/>    
+                <div class="input-field col s4">
+                    <asp:Button runat="server" id="btnGraf" Text="Gerar Relatório" class="waves-effect waves-light btn-large green darken-1" OnClick="btnGraf_Click"/>    
+                </div>
+                <div class="input-field col s2">
+                    <asp:DropDownList ID="ddMes" runat="server">
+                        <asp:ListItem Disabled Selected="True">Escolher Ano</asp:ListItem>
+                        <asp:ListItem><asp:ListItem>
+                    </asp:DropDownList>
                 </div>
             </div>            
         </div>
     </div>
     <div class="section">
         <div class="container white">
-            <asp:Chart runat="server" ID="ctl00"/>
+            <asp:Chart ID="Chart1" runat="server">
+                <series>
+                    <asp:Series Name="Series1">
+                    </asp:Series>
+                </series>
+                <chartareas>
+                    <asp:ChartArea Name="ChartArea1">
+                    </asp:ChartArea>
+                </chartareas>
+            </asp:Chart>
+            <asp:Chart ID="Chart2" runat="server">
+                <series>
+                    <asp:Series Name="Series1">
+                    </asp:Series>
+                </series>
+                <chartareas>
+                    <asp:ChartArea Name="ChartArea1">
+                    </asp:ChartArea>
+                </chartareas>
+            </asp:Chart>
+            <asp:Chart ID="Chart3" runat="server">
+                <series>
+                    <asp:Series Name="Series1">
+                    </asp:Series>
+                </series>
+                <chartareas>
+                    <asp:ChartArea Name="ChartArea1">
+                    </asp:ChartArea>
+                </chartareas>
+            </asp:Chart>
+            <asp:Chart ID="Chart4" runat="server">
+                <series>
+                    <asp:Series Name="Series1">
+                    </asp:Series>
+                </series>
+                <chartareas>
+                    <asp:ChartArea Name="ChartArea1">
+                    </asp:ChartArea>
+                </chartareas>
+            </asp:Chart>
         </div>
     </div>
 </asp:Content>
