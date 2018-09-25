@@ -26,6 +26,8 @@
               <li><a href="relatorio_paciente.aspx">Consultas de usuário</a></li>
               <li class="divider"></li>
               <li><a href="relatorio_medicao.aspx">Medição</a></li>
+              <li class="divider"></li>
+              <li><a href="relatorios.aspx">Gráficos de Relatórios</a></li>
             </ul>
             <nav class="green lighten-2">
               <div class="nav-wrapper container">
