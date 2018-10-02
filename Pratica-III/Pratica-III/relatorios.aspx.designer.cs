@@ -22,6 +22,15 @@ namespace Pratica_III {
         protected global::System.Web.UI.WebControls.DropDownList escolhaGraf;
         
         /// <summary>
+        /// Controle ddPesquisa.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddPesquisa;
+        
+        /// <summary>
         /// Controle btnGraf.
         /// </summary>
         /// <remarks>
@@ -40,39 +49,21 @@ namespace Pratica_III {
         protected global::System.Web.UI.WebControls.DropDownList ddMes;
         
         /// <summary>
-        /// Controle Chart1.
+        /// Controle btnGerarGraf.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart1;
+        protected global::System.Web.UI.WebControls.Button btnGerarGraf;
         
         /// <summary>
-        /// Controle Chart2.
+        /// Controle chartChart.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart2;
-        
-        /// <summary>
-        /// Controle Chart3.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart3;
-        
-        /// <summary>
-        /// Controle Chart4.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart4;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart chartChart;
     }
 }

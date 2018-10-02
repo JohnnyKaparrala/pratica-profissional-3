@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Pratica_III.App_Start;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
@@ -12,39 +16,68 @@ namespace Pratica_III
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Chart1.Visible = false;
-            Chart2.Visible = false;
-            Chart3.Visible = false;
-            Chart4.Visible = false;
+            chartChart.Visible = false;
         }
 
         protected void btnGraf_Click(object sender, EventArgs e)
         {
             try
             {
-                switch (escolhaGraf.SelectedIndex)
-                {
-                    case 0:
-                        throw new Exception("Escola uma opção!");
-                    case 1:
-                        Chart1.Visible = true;
-                        break;
-                    case 2:
-                        Chart2.Visible = true;
-                        break;
-                    case 3:
-                        Chart3.Visible = true;
-                        break;
-                    case 4:
-                        Chart4.Visible = true;
-                        break;
-                }
+                
 
             }
             catch (Exception er)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
+        }
+
+        protected void escolhaGraf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                
+                SqlConnection myConnection;
+                myConnection = new SqlConnection(conString);
+                myConnection.Open();
+
+                DataTable itens = new DataTable();
+                SqlDataAdapter adapter;
+
+                ddPesquisa.DataSource = itens;
+
+                switch (escolhaGraf.SelectedIndex)
+                {
+                    case 1: //consulta mensal por medico
+                        adapter = new SqlDataAdapter("SELECT id,nome FROM MEDICO", myConnection);
+                        adapter.Fill(itens);
+
+                        ddPesquisa.DataTextField = "nome";
+                        ddPesquisa.DataValueField = "id";
+
+                        break;
+                    case 2: //atendimento por especialidade
+                        break;
+                    case 3: //consulta por paciente
+                        break;
+                    case 4: //consultas canceladas
+                        break;
+                }
+
+                ddPesquisa.DataBind();
+                //ddPesquisa.Items.Insert(0, new ListItem("Selecione","0"));
+
+                ddPesquisa.Visible = true;
+                //ddMes.Visible = true;
+
+                myConnection.Close();
+            }
+            catch (Exception er)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
+            }
+
         }
     }
 }
