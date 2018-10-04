@@ -15,33 +15,23 @@
                         <asp:ListItem Value="3">Consulta por paciente</asp:ListItem>
                         <asp:ListItem Value="4">Consultas Canceladas</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:DropDownList ID="ddPesquisa" runat="server" Visible="false">
                     </asp:DropDownList>
                 </div>
                 <div class="input-field col s3">
-                    <asp:Button runat="server" id="btnGraf" Text="Pesquisar Dados" class="waves-effect waves-light btn-large green darken-1" OnClick="btnGraf_Click"/>    
-                    <asp:DropDownList ID="ddMes" runat="server" Visible="false">                            
-                        <asp:ListItem Value="0" Disabled Selected="True">Escolher mês</asp:ListItem>
-                        <asp:ListItem Value="1">Janeiro</asp:ListItem>
-                        <asp:ListItem Value="2">Fevereiro</asp:ListItem>
-                        <asp:ListItem Value="3">Março</asp:ListItem>
-                        <asp:ListItem Value="4">Abril</asp:ListItem>
-                        <asp:ListItem Value="5">Maio</asp:ListItem>
-                        <asp:ListItem Value="6">Junho</asp:ListItem>
-                        <asp:ListItem Value="7">Julho</asp:ListItem>
-                        <asp:ListItem Value="8">Agosto</asp:ListItem>
-                        <asp:ListItem Value="9">Setembro</asp:ListItem>
-                        <asp:ListItem Value="10">Outubro</asp:ListItem>
-                        <asp:ListItem Value="11">Novembro</asp:ListItem>
-                        <asp:ListItem Value="12">Dezembro</asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:Button runat="server" id="btnGraf" Text="Pesquisar Dados" class="waves-effect waves-light btn-large green darken-1" OnClick="btnGraf_Click"/>      
                 </div>
             </div>
-                <div class="row section">
-                    <center><asp:Button ID="btnGerarGraf" runat="server" Text="Gerar Gráfico" class="waves-effect waves-light btn-large green darken-1" /></center>
+            <div class="row section">
+                <div class="input-field col s12">
+                    <asp:DropDownList ID="ddPesquisa" runat="server" Visible="false"></asp:DropDownList><br />
+                    <asp:TextBox placeholder="Data" Visible="false" runat="server" id="txtData" type="text" class="datepicker"></asp:TextBox>
                 </div>
-            </div>            
-        </div>
+            </div>
+            <div class="row section">
+                <center><asp:Button ID="btnGerarGraf" runat="server" Visible="false" Text="Gerar Gráfico" class="waves-effect waves-light btn-large green darken-1" /></center>
+            </div>
+        </div>            
+    </div>
     <div class="section">
         <div class="container white">
             <asp:Chart ID="chartChart" runat="server">

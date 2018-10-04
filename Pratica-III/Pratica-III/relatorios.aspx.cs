@@ -47,29 +47,29 @@ namespace Pratica_III
 
                 ddPesquisa.DataSource = itens;
 
-                switch (escolhaGraf.SelectedIndex)
+                ddPesquisa.Visible = false;
+                txtData.Visible = false;
+
+                //poderia fazer um switch case, mas com if é melhor
+
+                //  consulta mensal por medico      consultas canceladas
+                if (escolhaGraf.SelectedIndex == 1 || escolhaGraf.SelectedIndex == 4)
                 {
-                    case 1: //consulta mensal por medico
-                        adapter = new SqlDataAdapter("SELECT id,nome FROM MEDICO", myConnection);
-                        adapter.Fill(itens);
+                    adapter = new SqlDataAdapter("SELECT id,nome FROM MEDICO", myConnection);
+                    adapter.Fill(itens);
 
-                        ddPesquisa.DataTextField = "nome";
-                        ddPesquisa.DataValueField = "id";
+                    ddPesquisa.DataTextField = "nome";
+                    ddPesquisa.DataValueField = "id";
 
-                        break;
-                    case 2: //atendimento por especialidade
-                        break;
-                    case 3: //consulta por paciente
-                        break;
-                    case 4: //consultas canceladas
-                        break;
+                    ddPesquisa.DataBind();
+                    //ddPesquisa.Items.Insert(0, new ListItem("Selecione","0"));
+                    ddPesquisa.Visible = true;
                 }
-
-                ddPesquisa.DataBind();
-                //ddPesquisa.Items.Insert(0, new ListItem("Selecione","0"));
-
-                ddPesquisa.Visible = true;
-                //ddMes.Visible = true;
+                else
+                if (escolhaGraf.SelectedIndex == 2) 
+                {
+                    txtData.Visible = true;
+                }
 
                 myConnection.Close();
             }
