@@ -49,6 +49,7 @@ namespace Pratica_III
 
                 ddPesquisa.Visible = false;
                 txtData.Visible = false;
+                btnGerarGraf.Visible = true;
 
                 //poderia fazer um switch case, mas com if é melhor
 
@@ -70,6 +71,10 @@ namespace Pratica_III
                 {
                     txtData.Visible = true;
                 }
+                else //3
+                {
+                    btnGerarGraf.Visible = false;
+                }
 
                 myConnection.Close();
             }
@@ -77,6 +82,50 @@ namespace Pratica_III
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
+
+        }
+
+        protected void btnGerarGraf_Click(object sender, EventArgs e)
+        {
+            String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+
+            DataTable table = new DataTable();
+            SqlDataAdapter adapt = new SqlDataAdapter();
+
+            SqlConnection myConnection;
+            myConnection = new SqlConnection(conString);
+            myConnection.Open();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConnection;
+            
+            switch (escolhaGraf.SelectedIndex)
+            {
+                case 1:
+                    cmd.CommandText = "SELECT count(*) as quantidade, RIGHT(CONVERT(CHAR(10),horario,103),7) as data FROM CONSULTA WHERE id_medico = @id group by RIGHT(CONVERT(CHAR(10), horario, 103), 7)";
+                    cmd.Parameters.Add("@id", SqlDbType.Int);
+                    cmd.Parameters["@id"].Value = ddPesquisa.SelectedValue;
+                    
+                    chartChart.Series[0].ChartType = SeriesChartType.Column;
+                    break;
+                case 2:                    
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
+            adapt.SelectCommand = cmd;
+            adapt.Fill(table);
+
+            chartChart.DataSource = table;
+            chartChart.Series[0].XValueMember = "data";
+            chartChart.Series[0].YValueMembers = "quantidade";
+            chartChart.DataBind();
+            
+            myConnection.Close();           
+
+            chartChart.Visible = true;
 
         }
     }

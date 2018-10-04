@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="row section">
-                <center><asp:Button ID="btnGerarGraf" runat="server" Visible="false" Text="Gerar Gráfico" class="waves-effect waves-light btn-large green darken-1" /></center>
+                <center><asp:Button ID="btnGerarGraf" runat="server" Visible="false" Text="Gerar Gráfico" class="waves-effect waves-light btn-large green darken-1" OnClick="btnGerarGraf_Click" /></center>
             </div>
         </div>            
     </div>
