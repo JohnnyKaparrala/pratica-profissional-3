@@ -71,8 +71,15 @@ namespace Pratica_III
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Bem-vindo(a)!'});", true);
                 Session["wel"] = false;
             }
-
+            
             h_menu.InnerHtml = "<li><a href=\"index.aspx\">Home</a></li>" + add;
+
+            if (Session["cargo"] != null)
+            {
+                
+                h_menu.InnerHtml += "<li><a href=\"consultas.aspx\"><img class='circle' height='60' width='64' runat='server' id='img-perfil'></a></li>";
+            }
+
             /*
             <li id="agendamento-menu"><a href="agendamento_consulta.aspx">Agendamentos de consulta</a></li>
             <li id="cadastro-menu"><a class="dropdown-trigger" data-target="cadastros-drop">Cadastros<i class="material-icons right">arrow_drop_down</i></a></li>
