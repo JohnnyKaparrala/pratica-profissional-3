@@ -7,7 +7,7 @@
         <div class="container white ">
             <center><h4>Relatórios</h4></center>
             <div class="row section" style="vertical-align: middle">
-                <div class="input-field col s9" >
+                <div class="input-field col s10" >
                     <asp:DropDownList runat="server" id="escolhaGraf" OnSelectedIndexChanged="escolhaGraf_SelectedIndexChanged">
                         <asp:ListItem Value="0" Disabled Selected="True">Escolher tipo de relatório</asp:ListItem>
                         <asp:ListItem Value="1">Consulta por Médico</asp:ListItem>
@@ -17,7 +17,7 @@
                     </asp:DropDownList>
                     </asp:DropDownList>
                 </div>
-                <div class="input-field col s3">
+                <div class="input-field col s2">
                     <asp:Button runat="server" id="btnGraf" Text="Pesquisar Dados" class="waves-effect waves-light btn-large green darken-1" OnClick="btnGraf_Click"/>      
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     clear: 'Limpar',
                     done: 'Ok'
                 },
-                format: 'yyyy-dd-mm'
+                format: 'dd-mm-yyyy'
             });
         });
     </script>
