@@ -15,7 +15,6 @@
                         <asp:ListItem Value="3">Consulta por paciente</asp:ListItem>
                         <asp:ListItem Value="4">Consultas Canceladas</asp:ListItem>
                     </asp:DropDownList>
-                    </asp:DropDownList>
                 </div>
                 <div class="input-field col s2">
                     <asp:Button runat="server" id="btnGraf" Text="Pesquisar Dados" class="waves-effect waves-light btn-large green darken-1" OnClick="btnGraf_Click"/>      
@@ -32,18 +31,21 @@
             </div>
         </div>            
     </div>
-    <div class="section">
-        <div class="container white">
-            <asp:Chart ID="chartChart" runat="server">
-                <Series>
-                    <asp:Series Name="SerieChart"></asp:Series>
-                </Series>
-                <ChartAreas>
-                    <asp:ChartArea Name="AreaChart"></asp:ChartArea>
-                </ChartAreas>
-            </asp:Chart>
+    <center>
+        <div class="section">
+            <div class="container white">
+                <asp:Chart ID="chartChart" runat="server" BorderlineColor="Control" BorderlineWidth="2" Palette="SeaGreen" SuppressExceptions="True">
+                    <Series>
+                        <asp:Series Name="SerieChart"></asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="AreaChart"></asp:ChartArea>
+                    </ChartAreas>
+                    <BorderSkin BackColor="MediumSeaGreen" SkinStyle="FrameThin1" />
+                </asp:Chart>
+            </div>
         </div>
-    </div>
+    </center>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="server">
     <script>

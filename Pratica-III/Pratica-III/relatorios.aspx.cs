@@ -78,7 +78,7 @@ namespace Pratica_III
             try{ 
                 String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
 
-                DataTable table = new DataTable();
+                DataTable dt = new DataTable();
                 SqlDataAdapter adapt = new SqlDataAdapter();
 
                 SqlConnection myConnection;
@@ -108,6 +108,8 @@ namespace Pratica_III
                         cmd.Parameters["@data"].Value = txtData.Text;
                         
                         chartChart.Series[0].ChartType = SeriesChartType.Pie;
+                        chartChart.Series[0].XValueMember = "especialidade";
+                        chartChart.Series[0].YValueMembers = "quantidade";                        
                         break;
                     case 3:
                         cmd.CommandText = "select count(distinct c.id_paciente) as quantidade, m.nome as medico	from CONSULTA c, MEDICO m " +
@@ -130,12 +132,26 @@ namespace Pratica_III
                         break;
                 }
                 adapt.SelectCommand = cmd;
-                adapt.Fill(table);
-                
-                chartChart.DataSource = table;
-                chartChart.DataBind();
-               
-                
+                adapt.Fill(dt);
+
+                if (escolhaGraf.SelectedIndex == 2)
+                {
+                    Dictionary<string, int> chartData = new Dictionary<string, int>();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string key = dr["especialidade"].ToString();
+                        int value = Convert.ToInt32(dr["quantidade"]);
+                        chartData.Add(key,value);
+                    }
+                    chartChart.Series[0].Points.DataBind(chartData, "especialidade", "quantidade", string.Empty);
+
+                }
+                else
+                {
+                    chartChart.DataSource = dt;
+                    chartChart.DataBind();
+                }  
+
                 myConnection.Close();
 
                 chartChart.Visible = true;
