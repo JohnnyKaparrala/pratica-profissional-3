@@ -43,7 +43,7 @@ namespace Pratica_III
                     {
                         add += "<li><a href=\"consultas.aspx\">Consultas</a></li>";
                         add += "<li><a href=\"contato.aspx\">Contato</a></li>";
-                        if (pageName != "avaliacao_consulta" && pageName != "index" && pageName != "logout" && pageName != "mudar_senha" && pageName != "consultas")
+                        if (pageName != "avaliacao_consulta" && pageName != "index" && pageName != "logout" && pageName != "mudar_senha" && pageName != "consultas" && pageName != "avaliar")
                         {
                             body.InnerHtml = "<h4>Você não tem acesso a esta página</h4><p class=\"flow-text\"><a href=\"index.aspx\">Voltar ao menu</a></p>";
                         }
@@ -76,8 +76,7 @@ namespace Pratica_III
 
             if (Session["cargo"] != null)
             {
-                
-                h_menu.InnerHtml += "<li><a href=\"consultas.aspx\"><img class='circle' height='60' width='64' runat='server' id='img-perfil'></a></li>";
+                //h_menu.InnerHtml += "<li><a href=\"consultas.aspx\"><img class='circle' height='60' width='64' runat='server' id='img-perfil'></a></li>";
             }
 
             /*

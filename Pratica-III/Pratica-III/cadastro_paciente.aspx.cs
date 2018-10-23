@@ -69,7 +69,8 @@ namespace Pratica_III
                     SqlDataReader reader = sqlcmd.ExecuteReader();
                     int val = -1;
                     reader.Read();
-                    val = Convert.ToInt32(reader.GetValue(0).ToString());
+                    if (reader.HasRows)
+                        val = Convert.ToInt32(reader.GetValue(0).ToString());
                     reader.Close();
                     if (val == 1)
                     {
