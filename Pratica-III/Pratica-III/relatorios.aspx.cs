@@ -75,84 +75,93 @@ namespace Pratica_III
 
         protected void btnGerarGraf_Click(object sender, EventArgs e)
         {
-            try{ 
-                String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
-
-                DataTable dt = new DataTable();
-                SqlDataAdapter adapt = new SqlDataAdapter();
-
-                SqlConnection myConnection;
-                myConnection = new SqlConnection(conString);
-                myConnection.Open();
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = myConnection;
-
-                switch (escolhaGraf.SelectedIndex)
+            try{
+                //diferentão
+                if(escolhaGraf.SelectedIndex == 2)
                 {
-                    case 1:
-                        cmd.CommandText = "SELECT count(*) as quantidade, RIGHT(CONVERT(CHAR(10),horario,103),7) as data" +
-                            " FROM CONSULTA WHERE id_medico = @id group by RIGHT(CONVERT(CHAR(10), horario, 103), 7)";
-                        cmd.Parameters.Add("@id", SqlDbType.Int);
-                        cmd.Parameters["@id"].Value = ddPesquisa.SelectedValue;
+                    string query = "select count(*) as quantidade, e.nome as especialidade from CONSULTA c, MEDICO m, ESPECIALIDADE_MEDICO e" +
+                        " where c.id_medico = m.id and m.id_especialidade_medico = e.id and CONVERT(VARCHAR(10), c.horario, 105) = @data group by e.nome";
 
-                        chartChart.Series[0].ChartType = SeriesChartType.Column;
-                        chartChart.Series[0].XValueMember = "data";
-                        chartChart.Series[0].YValueMembers = "quantidade";
-                        break;
-                    case 2:
-                        cmd.CommandText = "select count(*) as quantidade, e.nome as especialidade from CONSULTA c, MEDICO m, ESPECIALIDADE_MEDICO e" +
-                            " where c.id_medico = m.id and m.id_especialidade_medico = e.id and " +
-                            "CONVERT(CHAR(10),C.horario,103) = '@DATA' group by e.nome";
-                        cmd.Parameters.Add("@data", SqlDbType.VarChar);
-                        cmd.Parameters["@data"].Value = txtData.Text;
-                        
-                        chartChart.Series[0].ChartType = SeriesChartType.Pie;
-                        chartChart.Series[0].XValueMember = "especialidade";
-                        chartChart.Series[0].YValueMembers = "quantidade";                        
-                        break;
-                    case 3:
-                        cmd.CommandText = "select count(distinct c.id_paciente) as quantidade, m.nome as medico	from CONSULTA c, MEDICO m " +
-                            "where c.id_medico = m.id group by m.nome";
+                    DataTable dt = new DataTable();
+                    SqlCommand cmd = new SqlCommand(query);
+                    cmd.Parameters.Add("@data", SqlDbType.VarChar);
+                    cmd.Parameters["@data"].Value = txtData.Text;
+                    String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                    SqlConnection con = new SqlConnection(conString);
+                    SqlDataAdapter sda = new SqlDataAdapter();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    sda.Fill(dt);
 
-                        chartChart.Series[0].ChartType = SeriesChartType.Bar;
-                        chartChart.Series[0].XValueMember = "medico";
-                        chartChart.Series[0].YValueMembers = "quantidade";
-                        break;
-                    case 4:
-                        cmd.CommandText = "select count(*) as quantidade, RIGHT(CONVERT(CHAR(10),horario,103),7) as mes " +
-                            "from CONSULTA	where concluida = -1 and id_medico = @id	" +
-                            "group by id_medico, RIGHT(CONVERT(CHAR(10),horario,103),7)";
-                        cmd.Parameters.Add("@id", SqlDbType.Int);
-                        cmd.Parameters["@id"].Value = ddPesquisa.SelectedValue;
-
-                        chartChart.Series[0].ChartType = SeriesChartType.Column;
-                        chartChart.Series[0].XValueMember = "mes";
-                        chartChart.Series[0].YValueMembers = "quantidade";
-                        break;
-                }
-                adapt.SelectCommand = cmd;
-                adapt.Fill(dt);
-
-                if (escolhaGraf.SelectedIndex == 2)
-                {
-                    Dictionary<string, int> chartData = new Dictionary<string, int>();
-                    foreach (DataRow dr in dt.Rows)
+                    string[] x = new string[dt.Rows.Count];
+                    int[] y = new int[dt.Rows.Count];
+                    for(int i = 0; i < dt.Rows.Count; i++)
                     {
-                        string key = dr["especialidade"].ToString();
-                        int value = Convert.ToInt32(dr["quantidade"]);
-                        chartData.Add(key,value);
+                        x[i] = dt.Rows[i][1].ToString();
+                        y[i] = Convert.ToInt32(dt.Rows[i][0]);
                     }
-                    chartChart.Series[0].Points.DataBind(chartData, "especialidade", "quantidade", string.Empty);
+                    chartChart.Series[0].Points.DataBindXY(x, y);
+                    chartChart.Series[0].ChartType = SeriesChartType.Pie;
+                    chartChart.Enabled = true;
 
                 }
                 else
                 {
-                    chartChart.DataSource = dt;
-                    chartChart.DataBind();
-                }  
+                    String conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
 
-                myConnection.Close();
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter adapt = new SqlDataAdapter();
+
+                    SqlConnection myConnection;
+                    myConnection = new SqlConnection(conString);
+                    myConnection.Open();
+
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = myConnection;
+
+                    switch (escolhaGraf.SelectedIndex)
+                    {
+                        case 1:
+                            cmd.CommandText = "SELECT count(*) as quantidade, RIGHT(CONVERT(CHAR(10),horario,103),7) as data" +
+                                " FROM CONSULTA WHERE id_medico = @id group by RIGHT(CONVERT(CHAR(10), horario, 103), 7)";
+                            cmd.Parameters.Add("@id", SqlDbType.Int);
+                            cmd.Parameters["@id"].Value = ddPesquisa.SelectedValue;
+
+                            chartChart.Series[0].ChartType = SeriesChartType.Column;
+                            chartChart.Series[0].XValueMember = "data";
+                            chartChart.Series[0].YValueMembers = "quantidade";
+                            break;
+                        case 2://nunca será 2
+                            break;
+                        case 3:
+                            cmd.CommandText = "select count(distinct c.id_paciente) as quantidade, m.nome as medico	from CONSULTA c, MEDICO m " +
+                                "where c.id_medico = m.id group by m.nome";
+
+                            chartChart.Series[0].ChartType = SeriesChartType.Bar;
+                            chartChart.Series[0].XValueMember = "medico";
+                            chartChart.Series[0].YValueMembers = "quantidade";
+                            break;
+                        case 4:
+                            cmd.CommandText = "select count(*) as quantidade, RIGHT(CONVERT(CHAR(10),horario,103),7) as mes " +
+                                "from CONSULTA	where concluida = -1 and id_medico = @id	" +
+                                "group by id_medico, RIGHT(CONVERT(CHAR(10),horario,103),7)";
+                            cmd.Parameters.Add("@id", SqlDbType.Int);
+                            cmd.Parameters["@id"].Value = ddPesquisa.SelectedValue;
+
+                            chartChart.Series[0].ChartType = SeriesChartType.Column;
+                            chartChart.Series[0].XValueMember = "mes";
+                            chartChart.Series[0].YValueMembers = "quantidade";
+                            break;
+                    }
+                    adapt.SelectCommand = cmd;
+                    adapt.Fill(dt);
+                    
+                    chartChart.DataSource = dt;
+                    chartChart.DataBind();                    
+
+                    myConnection.Close();
+                }                
 
                 chartChart.Visible = true;
             }catch(Exception er)
@@ -175,6 +184,6 @@ namespace Pratica_III
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Erro: " + er.Message + "'});", true);
             }
-        }
+        }        
     }
 }
