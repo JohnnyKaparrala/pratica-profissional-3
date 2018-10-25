@@ -1,15 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Configuration;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using Pratica_III.App_Start;
+using System.IO;
+using System.Drawing;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace Pratica_III
 {
     public partial class menu : System.Web.UI.MasterPage
     {
+        conexaoBD acessoBD;
+        String conString;
         protected void Page_Load(object sender, EventArgs e)
         {
             string add = "";
@@ -23,7 +35,6 @@ namespace Pratica_III
             {
                 case 0://adm
                     {
-                        add += "<li><a href=\"consultas_adm.aspx\">Consultas</a></li>";
                         add += "<li><a href=\"agendamento_consulta.aspx\">Agendamentos de consulta</a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"cadastros-drop\">Cadastros<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"relatorios-drop\">Relatórios<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
@@ -74,9 +85,36 @@ namespace Pratica_III
             
             h_menu.InnerHtml = "<li><a href=\"index.aspx\">Home</a></li>" + add;
 
-            if (Session["cargo"] != null)
+            if (Convert.ToInt32(Session["cargo"]) == 1 || Convert.ToInt32(Session["cargo"]) == 2)
             {
-                //h_menu.InnerHtml += "<li><a href=\"consultas.aspx\"><img class='circle' height='60' width='64' runat='server' id='img-perfil'></a></li>";
+                conString = WebConfigurationManager.ConnectionStrings["conexaoBD"].ConnectionString;
+                acessoBD = new conexaoBD();
+                acessoBD.Connection(conString);
+                acessoBD.AbrirConexao();
+
+                SqlCommand sqlCmd = new SqlCommand();
+                SqlConnection myConnection;
+                myConnection = new SqlConnection(conString);
+                myConnection.Open();
+                sqlCmd.Connection = myConnection;
+
+                sqlCmd.CommandText = "SELECT FOTO FROM " + ((Convert.ToInt32(Session["cargo"]) == 1) ?"PACIENTE" : "MEDICO") + " WHERE ID = " + Session["idquem"];
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+
+                string base64String;
+                if (reader.Read())
+                {
+                    byte[] imagem = (byte[])(reader[0]);
+                    base64String = Convert.ToBase64String(imagem);
+                } else
+                {
+                    base64String = "";
+                }
+
+                imgLogin.ImageUrl = String.Format("data:image/jpg;base64,{0}", base64String);
+            } else
+            {
+                imgLogin.Attributes.Add("class", "no-display");
             }
 
             /*

@@ -29,8 +29,9 @@
             </ul>
             <nav class="green lighten-2">
               <div class="nav-wrapper container">
-                <a href="#!" class="brand-logo"><img src="logo.png" height="64px"/></a>
-                <ul id="h_menu" class="right hide-on-med-and-down" runat="server">
+                <a href="#!" class="brand-logo"><img src="logo.png" height="64"/></a>
+                <ul id="h_menu" class="right hide-on-med-and-down" runat="server" style="height:64px">
+                    <li><a><asp:Image ID="imgLogin" runat="server" class='circle' height='64' width='64'></asp:Image></a></li>
                 </ul>
               </div>
             </nav>
