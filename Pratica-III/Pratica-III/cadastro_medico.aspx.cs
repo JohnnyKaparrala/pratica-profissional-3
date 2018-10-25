@@ -146,20 +146,20 @@ namespace Pratica_III
 
                     //envia email com senha
                     {
-                        String em = "bellydogclinica@gmail.com";
+                        String em = "pharmercypr3@gmail.com";
                         MailMessage mail = new MailMessage();
                         mail.To.Add(txtEmail.Text);
-                        mail.From = new MailAddress(em, "Clínica Belly", System.Text.Encoding.UTF8);
-                        mail.Subject = "Seu Cadastro na Clínica Belly!";
+                        mail.From = new MailAddress(em, "PharMercy", System.Text.Encoding.UTF8);
+                        mail.Subject = "Cadastro na clínica PharMercy";
                         mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                        mail.Body = "Seu usuário é: " + txtEmail.Text + "\nSua senha é " + senha;
+                        mail.Body = "<h1>PharMercy</h1><p>Seu usuário é: <span style=\"color:#43a047\">" + txtEmail.Text + "</span></p><p>Sua senha é <span style=\"color:#43a047\">" + senha + "</span>.</p><p>Você pode alterá-la a qualquer momento no site.</p>";
                         mail.BodyEncoding = System.Text.Encoding.UTF8;
                         mail.IsBodyHtml = true;
                         mail.Priority = MailPriority.High;
 
                         SmtpClient cliente = new SmtpClient();
                         cliente.UseDefaultCredentials = false;
-                        cliente.Credentials = new System.Net.NetworkCredential(em, "bellypr3");
+                        cliente.Credentials = new System.Net.NetworkCredential(em, "clinicapr3");
                         cliente.Port = 587;
                         cliente.Host = "smtp.gmail.com";
                         cliente.EnableSsl = true;

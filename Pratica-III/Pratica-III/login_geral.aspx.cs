@@ -54,39 +54,42 @@ namespace Pratica_III
                         case 1://adm
                             {
                                 //começa verificando se é secretária
-                                sqlcmd.CommandText = "SELECT TOP 1 1 FROM ADM WHERE NOME = @NOME AND SENHA = @SENHA";
+                                sqlcmd.CommandText = "SELECT ID FROM ADM WHERE NOME = @NOME AND SENHA = @SENHA";
                                 sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
                                 sqlcmd.Parameters.AddWithValue("@SENHA", txtSenha.Text);
                                 SqlDataReader reader = sqlcmd.ExecuteReader();
                                 int val = -1;
                                 reader.Read();
                                 val = Convert.ToInt32(reader.GetValue(0).ToString());
+                                Session["idquem"] = reader[0];
                                 reader.Close();
                             }
                             break;
 
                         case 2://medc
                             {
-                                sqlcmd.CommandText = "SELECT TOP 1 1 FROM MEDICO WHERE EMAIL = @NOME AND SENHA = @SENHA";
+                                sqlcmd.CommandText = "SELECT ID FROM MEDICO WHERE EMAIL = @NOME AND SENHA = @SENHA";
                                 sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
                                 sqlcmd.Parameters.AddWithValue("@SENHA", conexaoBD.Hash(txtSenha.Text));
                                 SqlDataReader reader = sqlcmd.ExecuteReader();
                                 int val = -1;
                                 reader.Read();
                                 val = Convert.ToInt32(reader.GetValue(0).ToString());
+                                Session["idquem"] = reader[0];
                                 reader.Close();
                             }
                             break;
 
                         case 3://paciente
                             {
-                                sqlcmd.CommandText = "SELECT TOP 1 1 FROM PACIENTE WHERE EMAIL = @NOME AND SENHA = @SENHA";
+                                sqlcmd.CommandText = "SELECT ID FROM PACIENTE WHERE EMAIL = @NOME AND SENHA = @SENHA";
                                 sqlcmd.Parameters.AddWithValue("@NOME", txtEmail.Text);
                                 sqlcmd.Parameters.AddWithValue("@SENHA", conexaoBD.Hash(txtSenha.Text));
                                 SqlDataReader reader = sqlcmd.ExecuteReader();
                                 int val = -1;
                                 reader.Read();
                                 val = Convert.ToInt32(reader.GetValue(0).ToString());
+                                Session["idquem"] = reader[0];
                                 reader.Close();
                             }
                             break;

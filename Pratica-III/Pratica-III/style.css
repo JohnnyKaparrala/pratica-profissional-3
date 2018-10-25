@@ -19,3 +19,7 @@ main {
     cursor: pointer;
     color : white !important;
 }
+
+.no-display {
+    display: none;
+}

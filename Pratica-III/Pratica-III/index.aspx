@@ -7,9 +7,10 @@
         <div class="parallax-container">
             <div class="section no-pad-bot no-pad-top">
               <div class="container">
-                <h1 class="header center green-text">Clínica Mercy</h1>
+                <h1 class="header center green-text">Clínica PharMercy</h1>
                 <div class="row center">
-                  <h5 class="header col s12 white-text light">Venha se juntar a mais de 50.000 pacientes por hora. E temos orgulho de nossos profissionais altamente especializados.</h5>
+                  <h5 class="header col s12 white-text light">Profissionais de qualidade e eficiência no atendimento são o nosso foco.</h5>
+                  <h5 class="header col s12 white-text light">Junte-se a nós!</h5>
                 </div>
               </div>
             </div>
@@ -19,12 +20,12 @@
         </div>
     </div>
     <div class="section container">
-        <blockquote style="border-left-color: #4CAF50" class="flow-text">Nós da Cliníca Mercy fazemos várias consultas todos os dias e temos orgulho de nossas instalações e de nossos mais de 80.000.000.000 de pacientes diários satisfeitos</blockquote>
+        <blockquote style="border-left-color: #4CAF50" class="flow-text">Nos orgulhamos de nosso empenho e dedicação, resultando em um dos maiores índices de aprovação do mercado, premiado pela INTRA e ANAMT em apenas 1 ano de funcionamento.</blockquote>
     </div>
     <div class="section grey lighten-4">
         <div class="container">
-            <h3>Blblabl</h3>
-            <p class="flow-text">lorem ipsum para marcar uma consulta <a href="contato.aspx">contate-nos</a></p>
+            <h3>Marque Sua consulta</h3>
+            <p class="flow-text">Para marcar sua consulta com um de nossos profissionais, <a href="contato.aspx">contate-nos</a></p>
         </div>
     </div>
 </asp:Content>

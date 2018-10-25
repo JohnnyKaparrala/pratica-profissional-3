@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="agendamento_consulta.aspx" />
+    <Content Include="avaliar.aspx" />
     <Content Include="consultas.aspx" />
     <Content Include="consultas_adm.aspx" />
     <Content Include="consultas_medico.aspx" />
@@ -219,6 +220,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\conexaoBD.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="avaliar.aspx.cs">
+      <DependentUpon>avaliar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="avaliar.aspx.designer.cs">
+      <DependentUpon>avaliar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="consultas.aspx.cs">
       <DependentUpon>consultas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
