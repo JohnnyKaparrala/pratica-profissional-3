@@ -46,7 +46,7 @@ namespace Pratica_III
                         val = "✓";
                         conc = true;
                     }
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc? "<a class=\"waves-effect waves-light btn-small green darken-1\" href=\"avaliar.aspx\">AVALIAR</a>" : "Avaliação não disponível") + "</td><td>";
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc? "<a class=\"waves-effect waves-light btn-small green darken-1\" href=\"avaliar.aspx?id=" + reader.GetValue(0).ToString() + "&med=" + reader.GetValue(2).ToString() + "\">AVALIAR</a>" : "Avaliação não disponível") + "</td><td>";
                 }
             }
             catch (Exception er)

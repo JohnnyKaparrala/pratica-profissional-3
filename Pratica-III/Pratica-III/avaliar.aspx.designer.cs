@@ -22,13 +22,22 @@ namespace Pratica_III {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblId;
         
         /// <summary>
-        /// Controle lblPac.
+        /// Controle rdAvalicacao.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPac;
+        protected global::System.Web.UI.WebControls.RadioButtonList rdAvalicacao;
+        
+        /// <summary>
+        /// Controle txtComentario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtComentario;
         
         /// <summary>
         /// Controle btnSubmit.
