@@ -38,7 +38,8 @@ namespace Pratica_III
                         add += "<li><a href=\"agendamento_consulta.aspx\">Agendamentos de consulta</a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"cadastros-drop\">Cadastros<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"relatorios-drop\">Relatórios<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
-                    }break;
+                    }
+                    break;
 
                 case 1://med
                     {
@@ -60,10 +61,12 @@ namespace Pratica_III
                         }
                     }
                     break;
-                    
-                default: {
-                        
-                    } break;
+
+                default:
+                    {
+
+                    }
+                    break;
             }
             if (Session["cargo"] == null)
             {
@@ -82,7 +85,7 @@ namespace Pratica_III
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Bem-vindo(a)!'});", true);
                 Session["wel"] = false;
             }
-            
+
             h_menu.InnerHtml = "<li><a href=\"index.aspx\">Home</a></li>" + add;
 
             if (Convert.ToInt32(Session["cargo"]) == 1 || Convert.ToInt32(Session["cargo"]) == 2)
@@ -98,7 +101,7 @@ namespace Pratica_III
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
 
-                sqlCmd.CommandText = "SELECT FOTO FROM " + ((Convert.ToInt32(Session["cargo"]) == 1) ?"PACIENTE" : "MEDICO") + " WHERE ID = " + Session["idquem"];
+                sqlCmd.CommandText = "SELECT FOTO FROM " + ((Convert.ToInt32(Session["cargo"]) == 1) ? "MEDICO" : "PACIENTE") + " WHERE ID = " + Session["idquem"];
                 SqlDataReader reader = sqlCmd.ExecuteReader();
 
                 string base64String;
@@ -106,15 +109,13 @@ namespace Pratica_III
                 {
                     byte[] imagem = (byte[])(reader[0]);
                     base64String = Convert.ToBase64String(imagem);
-                } else
+                }
+                else
                 {
                     base64String = "";
                 }
 
-                imgLogin.ImageUrl = String.Format("data:image/jpg;base64,{0}", base64String);
-            } else
-            {
-                imgLogin.Attributes.Add("class", "no-display");
+                h_menu.InnerHtml += "<li><div style=\"display: flex; height: 64px;\"><img ID=\"imgLogin\" runat=\"server\" src=\"" + String.Format("data:image/jpeg;base64,{0}", base64String) + "\" class='circle' style='width: 50px; height: 50px; margin: auto;'/></div></li>";
             }
 
             /*
