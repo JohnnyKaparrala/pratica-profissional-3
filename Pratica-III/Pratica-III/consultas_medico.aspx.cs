@@ -32,10 +32,21 @@ namespace Pratica_III
                 myConnection = new SqlConnection(conString);
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
-
-                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, P.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_MEDICO = (SELECT ID FROM MEDICO WHERE EMAIL = @EMAIL) ORDER BY ID DESC";
+                
+                if (ddDura.SelectedValue == "99")
+                {
+                    sqlCmd.CommandText = "SELECT DISTINCT C.ID, C.HORARIO, P.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_MEDICO = (SELECT ID FROM MEDICO WHERE EMAIL = @EMAIL) AND C.horario > GETDATE() ORDER BY ID DESC";
+                }
+                else
+                {
+                    sqlCmd.CommandText = "SELECT DISTINCT C.ID, C.HORARIO, P.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_MEDICO = (SELECT ID FROM MEDICO WHERE EMAIL = @EMAIL) AND C.horario between GETDATE() and @data ORDER BY ID DESC";
+                    DateTime hj = DateTime.Now;
+                    sqlCmd.Parameters.AddWithValue("@data", hj.AddDays(Convert.ToDouble(ddDura.SelectedValue)).ToString("dd-M-yyyy"));
+                }
                 sqlCmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                 SqlDataReader reader = sqlCmd.ExecuteReader();
+
+                tbBody.InnerHtml = "";
 
                 while (reader.Read())
                 {
