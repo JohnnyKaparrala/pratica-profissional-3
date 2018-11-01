@@ -38,6 +38,7 @@ namespace Pratica_III
                         add += "<li><a href=\"agendamento_consulta.aspx\">Agendamentos de consulta</a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"cadastros-drop\">Cadastros<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                         add += "<li><a class=\"dropdown-trigger\" data-target=\"relatorios-drop\">Relatórios<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                        add += "<li><a href=\"servidor.aspx\">Servidor</a></li>";
                     }
                     break;
 

@@ -170,7 +170,7 @@ namespace Pratica_III
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
-                        sqlCmd.CommandText = "INSERT INTO CONSULTA(HORARIO, ID_PACIENTE, ID_MEDICO, CONCLUIDA, ANOTACOES, DURACAO) VALUES (@HORARIO,@ID_PACIENTE,@ID_MEDICO,0, NULL, @DURACAO)";
+                        sqlCmd.CommandText = "INSERT INTO CONSULTA(HORARIO, ID_PACIENTE, ID_MEDICO, CONCLUIDA, ANOTACOES, DURACAO, NOTIFICADOS) VALUES (@HORARIO,@ID_PACIENTE,@ID_MEDICO,0, NULL, @DURACAO, 0)";
 
                         sqlCmd.Parameters.AddWithValue("@HORARIO", horario);
                         sqlCmd.Parameters.AddWithValue("@ID_PACIENTE", p_id);

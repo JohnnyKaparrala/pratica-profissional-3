@@ -204,6 +204,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="servidor.aspx" />
     <Content Include="style.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -349,6 +350,13 @@
     </Compile>
     <Compile Include="relatorio_paciente.aspx.designer.cs">
       <DependentUpon>relatorio_paciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servidor.aspx.cs">
+      <DependentUpon>servidor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servidor.aspx.designer.cs">
+      <DependentUpon>servidor.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
