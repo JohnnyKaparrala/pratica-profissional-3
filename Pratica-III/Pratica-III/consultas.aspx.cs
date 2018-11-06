@@ -33,20 +33,32 @@ namespace Pratica_III
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
 
-                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, M.NOME, C.CONCLUIDA FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_PACIENTE = (SELECT ID FROM PACIENTE WHERE EMAIL = @EMAIL) ORDER BY ID DESC";
+                sqlCmd.CommandText = "SELECT C.ID, C.HORARIO, M.NOME, C.CONCLUIDA, C.AVALIACAO_PACIENTE FROM CONSULTA C, PACIENTE P, MEDICO M WHERE P.ID = C.ID_PACIENTE AND C.ID_PACIENTE = (SELECT ID FROM PACIENTE WHERE EMAIL = @EMAIL) ORDER BY ID DESC";
                 sqlCmd.Parameters.AddWithValue("@EMAIL", Session["quem"]);
                 SqlDataReader reader = sqlCmd.ExecuteReader();
 
                 while (reader.Read())
                 {
                     string val = "✕";
-                    bool conc = false;
-                    if (Convert.ToInt16( reader.GetValue(3).ToString()) == 1)
+                    string valConc;
+                    int conc = Convert.ToInt16(reader.GetValue(3).ToString());
+                    if (conc == 1)
                     {
+                        valConc = "<a class=\"waves-effect waves-light btn-small green darken-1\" href=\"avaliar.aspx?id=" + reader.GetValue(0).ToString() + "&med=" + reader.GetValue(2).ToString() + "\">AVALIAR</a>";
                         val = "✓";
-                        conc = true;
                     }
-                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + (conc? "<a class=\"waves-effect waves-light btn-small green darken-1\" href=\"avaliar.aspx?id=" + reader.GetValue(0).ToString() + "&med=" + reader.GetValue(2).ToString() + "\">AVALIAR</a>" : "Avaliação não disponível") + "</td><td>";
+                    if (conc == 0)
+                    {
+                        valConc = "Não concluida ainda";
+                    }
+                    else //if (conc == -1)
+                    {
+                        valConc = "Atrasada";
+                    }
+
+                    if (reader.GetValue(3) == DBNull.Value)
+                        valConc = "Não disponível";
+                    tbBody.InnerHtml += "<tr><td>" + reader.GetValue(0).ToString() + "</td><td>" + reader.GetValue(1).ToString() + "</td><td>" + reader.GetValue(2).ToString() + "</td><td><b>" + val + "</b></td><td>" + valConc + "</td><td>";
                 }
             }
             catch (Exception er)

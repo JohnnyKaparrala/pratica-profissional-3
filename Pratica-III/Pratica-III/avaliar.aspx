@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .face {
-            color : inherit;
+            color : #424242;
             cursor: pointer;
             transition:0.5s;
         }
@@ -48,19 +48,19 @@
                     <div class="col s1">
                     </div>
                     <div class="col s2">
-                        <a class="face r"><i class="material-icons large" onclick="changeCarinha(0)">sentiment_very_dissatisfied</i></a>
+                        <a class="face r"><i class="material-icons large carinha" onclick="changeCarinha(0)">sentiment_very_dissatisfied</i></a>
                     </div>
                     <div class="col s2">
-                        <a class="face rg"><i class="material-icons large" onclick="changeCarinha(1)">sentiment_dissatisfied</i></a>
+                        <a class="face rg"><i class="material-icons large carinha" onclick="changeCarinha(1)">sentiment_dissatisfied</i></a>
                     </div>
                     <div class="col s2">
-                        <a class="face gr"><i class="material-icons large" onclick="changeCarinha(2)">sentiment_neutral</i></a>
+                        <a class="face gr"><i class="material-icons large carinha" onclick="changeCarinha(2)">sentiment_neutral</i></a>
                     </div>
                     <div class="col s2">
-                        <a class="face rgr"><i class="material-icons large" onclick="changeCarinha(3)">sentiment_satisfied</i></a>
+                        <a class="face rgr"><i class="material-icons large carinha" onclick="changeCarinha(3)">sentiment_satisfied</i></a>
                     </div>
                     <div class="col s2">
-                        <a class="face g"><i class="material-icons large" onclick="changeCarinha(4)">sentiment_very_satisfied</i></a>
+                        <a class="face g"><i class="material-icons large carinha" onclick="changeCarinha(4)">sentiment_very_satisfied</i></a>
                     </div>
                     <div class="col s1">
                     </div>
@@ -79,13 +79,12 @@
                 <section>
                     <div class="input-field col s12">
                       <i class="material-icons prefix">mode_edit</i>
-                      <textarea class="materialize-textarea" runat="server" id="txtComentario"></textarea>
-                      <label for="txtComentario">Comentários (opcional)</label>
+                      <textarea class="materialize-textarea" runat="server" id="txtComentario" placeholder="Comentários (opcional)"></textarea>
                     </div>
                 </section>
                 <div class="section"></div>
                 <div class="section">
-                    <center><asp:Button ID="btnSubmit" runat="server" Text="Submeter" cssClass="waves-effect waves-light btn-large green darken-1" /></center>
+                    <center><asp:Button ID="btnSubmit" runat="server" Text="Submeter" cssClass="waves-effect waves-light btn-large green darken-1"  OnClick="btn_Submit_Click" /></center>
                 </div>
             </div>
         </div>
@@ -93,11 +92,13 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="server">
     <script>
-        M.textareaAutoResize($('#txtComentario'));
+        M.textareaAutoResize($("#<% = txtComentario.ClientID%>"));
 
         function changeCarinha (i) {
             $("#<% = rdAvalicacao.ClientID%>_" + i).attr('checked', 'checked');
-            console.log("carinha " + i);
+
+            $(".carinha").removeClass("black-text");
+            $($(".carinha")[i]).addClass("black-text");
         }
     </script>
 </asp:Content>

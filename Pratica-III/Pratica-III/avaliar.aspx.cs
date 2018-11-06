@@ -67,6 +67,7 @@ namespace Pratica_III
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "scr", "javascript:M.toast({html: 'Agradecemos pela avaliação!'});", true);
                     limparInputs();
                     acessoBD.FecharConexao();
+                    Response.Redirect("consultas.aspx");
                 }
             }
             catch (Exception er)
