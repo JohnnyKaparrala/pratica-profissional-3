@@ -13,7 +13,7 @@
         <div>
             <pre>
 <a href="index.aspx">voltar</a>
-Servidor:
+Servidor (as tarefas estão rodando em background)
 <div id="ConsoleTxt" runat="server"></div>
             </pre>
         </div>

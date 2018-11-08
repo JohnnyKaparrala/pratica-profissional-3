@@ -23,9 +23,6 @@
             </ul>
             <ul id="relatorios-drop" class="dropdown-content">
               <li><a href="relatorio_geral.aspx">Números de consulta</a></li>
-              <li><a href="relatorio_paciente.aspx">Consultas de usuário</a></li>
-              <li class="divider"></li>
-              <li><a href="relatorio_medicao.aspx">Medição</a></li>
               <li class="divider"></li>
               <li><a href="relatorios.aspx">Gráficos de Relatórios</a></li>
             </ul>

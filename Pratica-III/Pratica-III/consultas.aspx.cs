@@ -46,14 +46,18 @@ namespace Pratica_III
                     {
                         valConc = "<a class=\"waves-effect waves-light btn-small green darken-1\" href=\"avaliar.aspx?id=" + reader.GetValue(0).ToString() + "&med=" + reader.GetValue(2).ToString() + "\">AVALIAR</a>";
                         val = "✓";
-                    }
-                    if (conc == 0)
+                    } else if (conc == 0)
                     {
                         valConc = "Não concluida ainda";
                     }
                     else //if (conc == -1)
                     {
                         valConc = "Atrasada";
+                    }
+
+                    if (!DBNull.Value.Equals(reader.GetValue(4)))
+                    {
+                        valConc = "Já avaliada";
                     }
 
                     if (reader.GetValue(3) == DBNull.Value)

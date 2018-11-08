@@ -19,10 +19,13 @@ namespace Pratica_III
         Thread threadServ;
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*threadServ = new Thread(new ThreadStart(checar));
+            threadServ = new Thread(new ThreadStart(preparar));
             threadServ.IsBackground = true;
-            threadServ.Start();*/
-            checar();
+            threadServ.Start();
+        }
+
+        protected void preparar() {
+            SetUpTimer(new TimeSpan(23, 59, 59));
         }
 
         protected void checar ()
@@ -42,23 +45,20 @@ namespace Pratica_III
                 myConnection = new SqlConnection(conString);
                 myConnection.Open();
                 sqlCmd.Connection = myConnection;
-                string add;
                 if (true)
                 {
                     sqlCmd.CommandText = "select p.email, p.nome, m.email, m.nome, c.horario from PACIENTE p, MEDICO m, CONSULTA c where c.id_medico = m.id and c.id_paciente = p.id and c.horario >= DATEADD(d, 0, DATEDIFF(d, 0, GETDATE())) and c.horario <= (DATEADD(d, 0, DATEDIFF(d, 0, GETDATE())) + 2)";
                     SqlDataReader reader = sqlCmd.ExecuteReader();
-                    add = "";
                     
                     while (reader.Read())
                     {
-                        add += "<span>enviando email para " + reader.GetValue(0) + " e " + reader.GetValue(2) + " ...</span><br/>";
                         String em = "pharmercypr3@gmail.com";
                         MailMessage mail = new MailMessage();
                         mail.To.Add(reader.GetValue(0).ToString());
                         mail.From = new MailAddress(em, "PharMercy", System.Text.Encoding.UTF8);
                         mail.Subject = "Consulta na clínica PharMercy";
                         mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                        mail.Body = "<h1>PharMercy</h1><p>Olá " + reader.GetValue(1).ToString() + ", não se esqueça de sua consulta amanhã às " + reader.GetValue(4).ToString() + "</span></p>";
+                        mail.Body = "<h1>PharMercy</h1><p>Olá " + reader.GetValue(1).ToString() + ", não se esqueça de sua consulta em " + reader.GetValue(4).ToString() + "</span></p>";
                         mail.BodyEncoding = System.Text.Encoding.UTF8;
                         mail.IsBodyHtml = true;
                         mail.Priority = MailPriority.High;
@@ -94,7 +94,7 @@ namespace Pratica_III
                         mail.From = new MailAddress(em, "PharMercy", System.Text.Encoding.UTF8);
                         mail.Subject = "Consulta na clínica PharMercy";
                         mail.SubjectEncoding = System.Text.Encoding.UTF8;
-                        mail.Body = "<h1>PharMercy</h1><p>Olá " + reader.GetValue(3).ToString() + ", não se esqueça de sua consulta amanhã às " + reader.GetValue(4).ToString() + "</span></p>";
+                        mail.Body = "<h1>PharMercy</h1><p>Olá " + reader.GetValue(3).ToString() + ", não se esqueça de sua consulta em " + reader.GetValue(4).ToString() + "</span></p>";
                         mail.BodyEncoding = System.Text.Encoding.UTF8;
                         mail.IsBodyHtml = true;
                         mail.Priority = MailPriority.High;
@@ -125,8 +125,7 @@ namespace Pratica_III
                         }
                     }
                     reader.Close();
-
-                    add += "<span>resolvendo consultas nao concluidas</span><br/>";
+                    
                     sqlCmd.CommandText = "select id from CONSULTA where horario >= DATEADD(d,0, DATEDIFF(d,0, GETDATE()))-1 and horario <= (DATEADD(d,0,DATEDIFF(d,0, GETDATE()))) and concluida = 0";
                     reader = sqlCmd.ExecuteReader();
 
@@ -146,19 +145,30 @@ namespace Pratica_III
                         sqlCmd2.CommandText = "update consulta set concluida = -1 where id = @ID";
                         sqlCmd2.Parameters.AddWithValue("@ID", arr[j]);
                         sqlCmd2.ExecuteNonQuery();
-                        add += "<span>consulta de id " + arr[j] + "resolvida</span><br/>";
                     }
                     reader.Close();
-                    add += "<span>fim</span><br/>";
                 }
                 acessoBD.FecharConexao();
-
-                ConsoleTxt.InnerHtml = add;
             }
             catch (Exception er)
             {
                 ConsoleTxt.InnerHtml += "\n\nErro: " + er.Message;
             }
+        }
+
+        private System.Threading.Timer timer;
+        private void SetUpTimer(TimeSpan alertTime)
+        {
+            DateTime current = DateTime.Now;
+            TimeSpan timeToGo = alertTime - current.TimeOfDay;
+            if (timeToGo < TimeSpan.Zero)
+            {
+                return;//time already passed
+            }
+            this.timer = new System.Threading.Timer(x =>
+            {
+                this.checar();
+            }, null, timeToGo, Timeout.InfiniteTimeSpan);
         }
     }
 }
