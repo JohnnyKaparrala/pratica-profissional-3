@@ -22,15 +22,6 @@ namespace Pratica_III {
         protected global::System.Web.UI.WebControls.TextBox txtData;
         
         /// <summary>
-        /// Controle btnRemarcar.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRemarcar;
-        
-        /// <summary>
         /// Controle txtHor.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,14 @@ namespace Pratica_III {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList txtHor;
+        
+        /// <summary>
+        /// Controle btnRemarcar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemarcar;
     }
 }

@@ -13,7 +13,7 @@ namespace Pratica_III
     public partial class remarcar : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
             DateTime data = DateTime.Now;
             for (int m = 0, h = 9; h < 17; m += 30)
             {

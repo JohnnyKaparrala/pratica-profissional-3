@@ -2,25 +2,29 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2> Selecione a nova data da Consulta:</h2>
-    <div class="section">
-        <div class="row">                
+    
+    <div class="section container">
+
+        <h2> Selecione a nova data da Consulta:</h2>
+
+        <div class="row">             
             <div class="input-field col s6">
                 <i class="material-icons prefix tooltipped" data-position="bottom" data-tooltip="Formato: aaaa-mm-dd">date_range</i>
                 <asp:TextBox placeholder="Nova data" runat="server" id="txtData" type="text" class="datepicker"></asp:TextBox>
             </div>
-        </div>
-        <div class="row">
+
             <div class="input-field col s6">
-                <asp:Button ID="btnRemarcar" runat="server" Text="Remarcar" class="waves-effect waves-light btn-large green darken-1" OnClick="btnRemarcar_Click"></asp:Button>
-            </div>
-            <div>
                 <asp:DropDownList runat="server" id="txtHor">
-                            <asp:ListItem disabled>Escolha o horário</asp:ListItem>
-                        </asp:DropDownList>
-                        <label>Horário</label>
+                    <asp:ListItem disabled>Escolha o horário</asp:ListItem>
+                </asp:DropDownList>
+                <label>Horário</label>
             </div>
-        </div>   
+        </div>
+
+        <center>
+            <asp:Button ID="btnRemarcar" runat="server" Text="Remarcar" class="waves-effect waves-light btn-large green darken-1" OnClick="btnRemarcar_Click"></asp:Button>
+        </center>   
+
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="server">    
@@ -39,7 +43,7 @@
                     done: 'Ok'
                 },
                 yearRange: 100,
-                format: 'yyyy-mm-dd',
+                format: 'yyyy-dd-mm',
                 onOpen: function () {
                     var instance = M.Datepicker.getInstance($('.datepicker'));
                     instance.options.minDate = new Date();
