@@ -64,7 +64,7 @@ namespace Pratica_III
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
-                        sqlCmd.CommandText = "UPDATE CONSULTA SET ANOTACOES = @ANOTACOES, CONCLUIDA = 1 WHERE ID = @ID";
+                        sqlCmd.CommandText = "UPDATE CONSULTA SET ANOTACOES = UPPER(@ANOTACOES), CONCLUIDA = 1 WHERE ID = @ID";
                         sqlCmd.Parameters.AddWithValue("@ANOTACOES", txtAnotacao.Text);
                         sqlCmd.Parameters.AddWithValue("@ID", id);
                     }

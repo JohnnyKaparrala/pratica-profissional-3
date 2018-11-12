@@ -189,7 +189,7 @@ namespace Pratica_III
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
-                        sqlCmd.CommandText = "INSERT INTO MEDICO(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO, ID_ESPECIALIDADE_MEDICO, SENHA) VALUES (@NOME,@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL,@FOTO,@ID_ESPECIALIDADE_MEDICO, @SENHA)";
+                        sqlCmd.CommandText = "INSERT INTO MEDICO(NOME, ANIVERSARIO, EMAIL, CELULAR, TELEFONE_RESIDENCIAL, FOTO, ID_ESPECIALIDADE_MEDICO, SENHA) VALUES (UPPER(@NOME),@ANIVERSARIO,@EMAIL,@CELULAR,@TELEFONE_RESIDENCIAL,@FOTO,@ID_ESPECIALIDADE_MEDICO, @SENHA)";
 
                         sqlCmd.Parameters.AddWithValue("@NOME", txtNome.Text);
                         sqlCmd.Parameters.AddWithValue("@EMAIL", txtEmail.Text);

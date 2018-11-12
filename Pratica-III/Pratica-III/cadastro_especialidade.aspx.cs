@@ -73,7 +73,7 @@ namespace Pratica_III
                     sqlCmd.Connection = myConnection;
                     if (sqlCmd.Parameters.Count == 0)
                     {
-                        sqlCmd.CommandText = "INSERT INTO ESPECIALIDADE_MEDICO(NOME) VALUES (@NOME)";
+                        sqlCmd.CommandText = "INSERT INTO ESPECIALIDADE_MEDICO(NOME) VALUES (UPPER(@NOME))";
 
                         sqlCmd.Parameters.AddWithValue("@NOME", txtEsp.Text.ToUpper().ToString());
                     }

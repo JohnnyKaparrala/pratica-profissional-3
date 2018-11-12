@@ -175,8 +175,6 @@
     <Content Include="mudar_senha.aspx" />
     <Content Include="relatorios.aspx" />
     <Content Include="relatorio_geral.aspx" />
-    <Content Include="relatorio_medicao.aspx" />
-    <Content Include="relatorio_paciente.aspx" />
     <Content Include="remarcar.aspx" />
     <Content Include="script.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -337,20 +335,6 @@
     </Compile>
     <Compile Include="relatorio_geral.aspx.designer.cs">
       <DependentUpon>relatorio_geral.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="relatorio_medicao.aspx.cs">
-      <DependentUpon>relatorio_medicao.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="relatorio_medicao.aspx.designer.cs">
-      <DependentUpon>relatorio_medicao.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="relatorio_paciente.aspx.cs">
-      <DependentUpon>relatorio_paciente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="relatorio_paciente.aspx.designer.cs">
-      <DependentUpon>relatorio_paciente.aspx</DependentUpon>
     </Compile>
     <Compile Include="remarcar.aspx.cs">
       <DependentUpon>remarcar.aspx</DependentUpon>
